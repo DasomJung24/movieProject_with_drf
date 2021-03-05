@@ -35,7 +35,7 @@ class Movie(TimeStampedModel):
 
 
 class Image(TimeStampedModel):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, related_name='images', on_delete=models.CASCADE)
     url = models.URLField()
     type = models.PositiveSmallIntegerField(choices=IMAGE_CHOICES)
 
