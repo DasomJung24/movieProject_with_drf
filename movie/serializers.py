@@ -56,7 +56,7 @@ class AudienceRatingSerializer(serializers.ModelSerializer):
         fields = ('grade', )
 
 
-class DirectorSerilaizer(serializers.ModelSerializer):
+class DirectorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Director
         fields = ('name', )
@@ -69,6 +69,12 @@ class MovieDetailSerializer(serializers.ModelSerializer):
     type = serializers.SerializerMethodField('get_type')
     audience_rating = serializers.SerializerMethodField('get_audience_rating')
     director = serializers.SerializerMethodField('get_directors')
+    images = serializers.SerializerMethodField('get_images')
+
+    def get_images(self, movie):
+        image = Image.objects.filter(movie=movie)
+        serializers = ImageSerializer(image, many=True)
+        return serializers.data
 
     def get_actors(self, movie):
         actors = Actor.objects.filter(movie=movie)
@@ -97,9 +103,10 @@ class MovieDetailSerializer(serializers.ModelSerializer):
 
     def get_directors(self, movie):
         directors = Director.objects.filter(movie=movie)
-        serializers = DirectorSerilaizer(directors, many=True)
+        serializers = DirectorSerializer(directors, many=True)
         return serializers.data
 
     class Meta:
         model = Movie
-        fields = '__all__'
+        fields = ['id', 'title', 'english_title', 'content', 'opening_date', 'running_time', 'ticketing_rate',
+                  'audience_rating', 'tag', 'actor', 'director', 'genre', 'type', 'images']
