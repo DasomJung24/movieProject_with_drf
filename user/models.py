@@ -11,12 +11,12 @@ class TimeStampedModel(models.Model):
 
 
 class User(TimeStampedModel):
-    name = models.CharField(max_length=50, null=True, blank=True)
-    birth = models.DateField(null=True, blank=True)
-    phone_number = models.CharField(max_length=20, null=True, blank=True)
-    account = models.CharField(max_length=50)
-    password = models.CharField(max_length=100, null=True, blank=True)
-    email = models.EmailField()
+    name = models.CharField(max_length=50)
+    birth = models.DateField()
+    phone_number = models.CharField(max_length=20, unique=True)
+    account = models.CharField(max_length=50, null=True, blank=True, unique=True)
+    password = models.CharField(max_length=100)
+    email = models.EmailField(null=True, blank=True, unique=True)
     is_user = models.BooleanField(default=True)
 
     def __str__(self):
