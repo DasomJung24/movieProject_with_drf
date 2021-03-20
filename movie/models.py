@@ -1,6 +1,7 @@
 from django.db import models
-from user.models import TimeStampedModel
 from django.utils.translation import gettext as _
+
+from megabox_clone_project.settings import AUTH_USER_MODEL
 
 IMAGE_MAIN = 1
 IMAGE_SUB = 2
@@ -11,6 +12,15 @@ IMAGE_CHOICES = (
     (IMAGE_SUB, (_('서브이미지'))),
     (IMAGES, (_('나머지이미지'))),
 )
+
+
+class TimeStampedModel(models.Model):
+    created_datetime = models.DateTimeField(auto_now_add=True, blank=True)
+    updated_datetime = models.DateTimeField(auto_now=True, blank=True)
+
+    class Meta:
+        abstract = True
+        ordering = ('-created_datetime',)
 
 
 class Movie(TimeStampedModel):
@@ -29,6 +39,7 @@ class Movie(TimeStampedModel):
 
     class Meta:
         ordering = ('-ticketing_rate', 'title', )
+        db_table = 'movie'
 
     def __str__(self):
         return self.title
@@ -39,34 +50,58 @@ class Image(TimeStampedModel):
     url = models.URLField()
     type = models.PositiveSmallIntegerField(choices=IMAGE_CHOICES)
 
+    class Meta:
+        db_table = 'image'
+
 
 class Rating(models.Model):
-    user = models.ForeignKey('user.User', on_delete=models.CASCADE)
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     score = models.PositiveIntegerField()
+
+    class Meta:
+        db_table = 'rating'
 
 
 class AudienceRating(models.Model):
     grade = models.CharField(max_length=20)
 
+    class Meta:
+        db_table = 'audience_rating'
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=40)
+
+    class Meta:
+        db_table = 'tag'
 
 
 class Actor(models.Model):
     name = models.CharField(max_length=100)
 
+    class Meta:
+        db_table = 'actor'
+
 
 class Director(models.Model):
     name = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'director'
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=30)
 
+    class Meta:
+        db_table = 'genre'
+
 
 class Type(models.Model):
     name = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = 'type'
 
 

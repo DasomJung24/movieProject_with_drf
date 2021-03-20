@@ -1,29 +1,26 @@
-import re
-from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
+from rest_framework_jwt.settings import api_settings
 
 from .models import User
 
 
-class UserSerializer(serializers.ModelSerializer):
-    def validate(self, attrs):
-        if attrs['is_user']:
-            if not attrs['account'] or not attrs['email']:
-                raise serializers.ValidationError('account와 email을 입력해주세요.')
-            elif not re.match(r'^.*(?=^.{8,12}$)(?=.*\d)(?=.*[a-zA-Z]).*$', attrs['account']):
-                raise serializers.ValidationError('account 형식을 지켜주세요.')
+class UserSignUpSerializer(serializers.ModelSerializer):
+    token = serializers.SerializerMethodField('get_token')
 
-        if not re.match(r'^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$', attrs['password']):
-            raise serializers.ValidationError('password 형식을 지켜주세요.')
-        else:
-            return attrs
+    def get_token(self, user):
+        jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+        jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
+        payload = jwt_payload_handler(user)
+        token = jwt_encode_handler(payload)
+        return token
 
     def create(self, validate_data):
-        user = super(UserSerializer, self).create(self.validated_data)
-        user.password = make_password(self.validated_data['password'])
+        user = self.Meta.model(**validate_data)
+        user.set_password(validate_data['password'])
         user.save()
         return user
 
     class Meta:
         model = User
-        fields = ('name', 'birth', 'phone_number', 'account', 'password', 'email', 'is_user', )
+        fields = ('token', 'username', 'birth', 'phone_number', 'password', 'email', 'name', )

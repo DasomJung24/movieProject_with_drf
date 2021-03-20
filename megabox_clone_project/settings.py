@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import datetime
 from pathlib import Path
 import my_settings
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_jwt',
     'user',
     'movie',
     'reservation',
@@ -79,6 +80,27 @@ WSGI_APPLICATION = 'megabox_clone_project.wsgi.application'
 
 DATABASES = my_settings.DATABASES
 
+AUTH_USER_MODEL = 'user.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    )
+}
+
+JWT_AUTH = {
+   'JWT_SECRET_KEY': SECRET_KEY,
+   'JWT_ALGORITHM': 'HS256',
+   'JWT_VERIFY_EXPIRATION': True,
+   'JWT_ALLOW_REFRESH': True,
+   'JWT_EXPIRATION_DELTA': datetime.timedelta(minutes=30),
+   'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=3),
+   'JWT_RESPONSE_PAYLOAD_HANDLER': 'api.custom_responses.my_jwt_response_handler'
+}
+REST_USE_JWT = True
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
