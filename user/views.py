@@ -6,5 +6,5 @@ from .serializers import UserSignUpSerializer
 
 class UserSignUpViewSet(viewsets.ModelViewSet):
     serializer_class = UserSignUpSerializer
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = [permissions.AllowAny]
     model = User
