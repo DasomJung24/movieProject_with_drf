@@ -23,4 +23,11 @@ class UserSignUpSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('token', 'username', 'birth', 'phone_number', 'password', 'email', 'name', )
+        fields = ('token', 'id', 'username', 'birth', 'phone_number', 'password', 'email', 'name', )
+
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'birth', 'phone_number', 'password', 'email', 'name', )
