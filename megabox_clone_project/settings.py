@@ -108,10 +108,10 @@ JWT_AUTH = {
    'JWT_ALGORITHM': 'HS256',
    'JWT_VERIFY_EXPIRATION': True,
    'JWT_ALLOW_REFRESH': True,
-   'JWT_EXPIRATION_DELTA': datetime.timedelta(minutes=30),
+   'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=3),
-   'JWT_RESPONSE_PAYLOAD_HANDLER': 'api.custom_responses.my_jwt_response_handler'
 }
+
 REST_USE_JWT = True
 
 # Password validation
