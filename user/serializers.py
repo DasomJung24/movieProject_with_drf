@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
-from .models import User
+from .models import User, Like
 
 
 class UserSignUpSerializer(serializers.ModelSerializer):
@@ -26,8 +26,15 @@ class UserSignUpSerializer(serializers.ModelSerializer):
         fields = ('token', 'id', 'username', 'birth', 'phone_number', 'password', 'email', 'name', )
 
 
-class UserUpdateSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
         fields = ('id', 'username', 'birth', 'phone_number', 'password', 'email', 'name', )
+
+
+class LikeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Like
+        fields = ('user_id', 'movie_id', )
