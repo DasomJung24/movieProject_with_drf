@@ -43,7 +43,7 @@ class LikeViewSet(viewsets.ModelViewSet):
         try:
             data = json.loads(request.body)
             data['user_id'] = request.user.id
-            serializer = LikeSerializer(data=data)
+            serializer = LikeSerializer(data)
             if serializer.is_valid():
                 like, flag = Like.objects.get_or_create(**data)
                 if not flag:
