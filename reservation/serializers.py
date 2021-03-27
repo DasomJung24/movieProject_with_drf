@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import City, Theater
+from .models import City, Theater, TheaterScreen
 
 
 class TheaterSerializer(serializers.ModelSerializer):
@@ -20,3 +20,25 @@ class ReservationMainSerializer(serializers.ModelSerializer):
     class Meta:
         model = City
         fields = ['id', 'name', 'theater', ]
+
+
+class TheaterTodaySerializer(serializers.ModelSerializer):
+    screen = serializers.SlugRelatedField(
+        many=False,
+        read_only=True,
+        slug_field='number'
+    )
+    theater = serializers.SlugRelatedField(
+        many=False,
+        read_only=True,
+        slug_field='name'
+    )
+    movie = serializers.SlugRelatedField(
+        many=False,
+        read_only=True,
+        slug_field='title'
+    )
+
+    class Meta:
+        model = TheaterScreen
+        fields = ['id', 'screen', 'theater', 'movie', 'start_datetime', ]
