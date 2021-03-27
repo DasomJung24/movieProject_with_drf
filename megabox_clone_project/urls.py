@@ -9,4 +9,5 @@ urlpatterns = [
     path('jwt-auth/', obtain_jwt_token),  # 로그인 & JWT 토큰 획득
     path('jwt-auth/refresh/', refresh_jwt_token),  # JWT 토큰 갱신
     path('jwt-auth/verify/', verify_jwt_token),   # JWT 토큰 확인
+    path('reservations', include('reservation.urls')),
 ]
