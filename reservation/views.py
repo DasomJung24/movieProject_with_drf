@@ -31,7 +31,6 @@ class TheaterTodayViewSet(viewsets.ModelViewSet):
         queryset = TheaterScreen.objects.all()
         queryset = queryset.filter(
             theater_id=self.kwargs['theater_id'],
-            start_datetime__gte=timezone.now(),
-            # start_datetime=datetime.today()
+            start_datetime__gte=timezone.now()
         )
         return queryset
