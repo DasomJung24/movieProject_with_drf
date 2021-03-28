@@ -10,9 +10,9 @@ class MovieViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = Movie.objects.all().prefetch_related('images')
-        t = self.request.query_params.get('type', None)
+        t = self.request.query_params.get('tag', None)
         if t:
-            queryset = queryset.filter(type=t)
+            queryset = queryset.filter(tag=t)
         return queryset
 
 
