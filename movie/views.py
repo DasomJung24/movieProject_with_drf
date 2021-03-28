@@ -1,6 +1,4 @@
 from rest_framework import viewsets, permissions
-from rest_framework.generics import get_object_or_404
-from rest_framework.response import Response
 
 from .serializers import MovieSerializer, MovieDetailSerializer
 from .models import *

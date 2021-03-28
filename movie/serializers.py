@@ -1,10 +1,15 @@
 from rest_framework import serializers
 
-from .models import Movie, Image, Actor, Genre, Tag, Type, AudienceRating, Director
+from .models import Movie, Image
 
 
 class MovieSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
+    audience_rating = serializers.SlugRelatedField(
+        many=False,
+        read_only=True,
+        slug_field='grade'
+    )
 
     def get_image(self, movie):
         if Image.objects.filter(type=1, movie=movie):
