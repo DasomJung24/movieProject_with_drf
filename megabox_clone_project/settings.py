@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_auth',
     'rest_framework_jwt',
+    'drf_yasg',
     'user',
     'movie',
     'reservation',
