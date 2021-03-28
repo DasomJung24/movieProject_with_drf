@@ -3,27 +3,19 @@ from rest_framework import serializers
 from .models import Movie, Image, Actor, Genre, Tag, Type, AudienceRating, Director
 
 
-class ImageSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Image
-        fields = ('url', )
-
-
 class MovieSerializer(serializers.ModelSerializer):
-    images = serializers.SerializerMethodField('get_images')
+    image = serializers.SerializerMethodField()
 
-    def get_images(self, movie):
+    def get_image(self, movie):
         if Image.objects.filter(type=1, movie=movie):
-            image = Image.objects.get(type=1, movie=movie)
+            image = Image.objects.get(type=1, movie=movie).url
         else:
             image = None
-        serializers = ImageSerializer(image, many=False)
-        return serializers.data
+        return image
 
     class Meta:
         model = Movie
-        fields = ['id', 'title', 'audience_rating', 'opening_date', 'images']
+        fields = ['id', 'title', 'audience_rating', 'opening_date', 'image']
 
 
 class MovieDetailSerializer(serializers.ModelSerializer):

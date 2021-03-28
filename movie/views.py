@@ -11,7 +11,7 @@ class MovieViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
 
     def get_queryset(self):
-        queryset = Movie.objects.all()
+        queryset = Movie.objects.all().prefetch_related('images')
         t = self.request.query_params.get('type', None)
         if t:
             queryset = queryset.filter(type=t)
