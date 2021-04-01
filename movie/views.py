@@ -1,4 +1,5 @@
 from rest_framework import viewsets, permissions
+from django_filters import rest_framework as filters
 
 from .serializers import MovieSerializer, MovieDetailSerializer
 from .models import *
@@ -7,13 +8,9 @@ from .models import *
 class MovieViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
     permission_classes = [permissions.AllowAny]
-
-    def get_queryset(self):
-        queryset = Movie.objects.all().prefetch_related('images')
-        t = self.request.query_params.get('tag', None)
-        if t:
-            queryset = queryset.filter(tag=t)
-        return queryset
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_fields = ['tag']
+    queryset = Movie.objects.all().prefetch_related('images')
 
 
 class MovieDetailViewSet(viewsets.ModelViewSet):

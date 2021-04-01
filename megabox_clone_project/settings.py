@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_framework_jwt',
     'drf_yasg',
+    'django_filters',
     'user',
     'movie',
     'reservation',
@@ -91,7 +92,8 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    )
+    ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
