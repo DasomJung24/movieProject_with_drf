@@ -1,7 +1,7 @@
 import json
 
 from django.http import JsonResponse
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -15,6 +15,14 @@ class UserSignUpViewSet(viewsets.ModelViewSet):
     serializer_class = UserSignUpSerializer
     permission_classes = [permissions.AllowAny]
     model = User
+
+    def create(self, request, *args, **kwargs):
+        data = request.data.get('user', None)
+        data['birth'] = data['birth'].split('T')[0]
+        serializer = self.serializer_class(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class UserViewSet(viewsets.ModelViewSet):
