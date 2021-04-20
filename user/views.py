@@ -1,28 +1,38 @@
 import json
 
 from django.http import JsonResponse
-from rest_framework import viewsets, permissions, status
-from rest_framework.decorators import action
-from rest_framework.generics import get_object_or_404
+from rest_framework import viewsets, permissions, status, generics
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from .models import User, Like
-from .serializers import UserSignUpSerializer, UserSerializer, LikeSerializer
+from .serializers import UserSignUpSerializer, UserSerializer, LikeSerializer, UserLoginSerializer
 
 
-class UserSignUpViewSet(viewsets.ModelViewSet):
+class UserSignUpView(generics.CreateAPIView):
     serializer_class = UserSignUpSerializer
     permission_classes = [permissions.AllowAny]
     model = User
 
-    def create(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         data = request.data.get('user', None)
         data['birth'] = data['birth'].split('T')[0]
         serializer = self.serializer_class(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class UserLoginView(APIView):
+    serializer_class = UserLoginSerializer
+    permission_classes = [permissions.AllowAny]
+    model = User
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class UserViewSet(viewsets.ModelViewSet):
