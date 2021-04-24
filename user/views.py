@@ -52,12 +52,12 @@ user_profile = UserViewSet.as_view({
 })
 
 
-class LikeViewSet(viewsets.ModelViewSet):
+class LikeViewSet(generics.CreateAPIView):
     serializer_class = LikeSerializer
     permission_classes = [permissions.IsAuthenticated]
     model = Like
 
-    def create(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         try:
             data = json.loads(request.body)
             data['user_id'] = request.user.id
