@@ -71,3 +71,10 @@ class LikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
         fields = ('user_id', 'movie_id', )
+
+    def create(self, validated_data):
+        like = Like.objects.create(**validated_data)
+        movie = Movie.objects.get(id=like.movie_id)
+        movie.like_count += 1
+        movie.save()
+        return like

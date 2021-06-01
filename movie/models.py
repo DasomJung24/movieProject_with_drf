@@ -28,6 +28,7 @@ class Movie(BaseModel):
     director = models.ManyToManyField('Director')
     genre = models.ManyToManyField('Genre')
     type = models.ManyToManyField('Type')
+    like_count = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ('-ticketing_rate', 'title', )
