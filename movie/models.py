@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 
+from megabox_clone_project.models import BaseModel
 from megabox_clone_project.settings import AUTH_USER_MODEL
 
 IMAGE_MAIN = 1
@@ -14,16 +15,7 @@ IMAGE_CHOICES = (
 )
 
 
-class TimeStampedModel(models.Model):
-    created_datetime = models.DateTimeField(auto_now_add=True, blank=True)
-    updated_datetime = models.DateTimeField(auto_now=True, blank=True)
-
-    class Meta:
-        abstract = True
-        ordering = ('-created_datetime',)
-
-
-class Movie(TimeStampedModel):
+class Movie(BaseModel):
     title = models.CharField(max_length=100)
     english_title = models.CharField(max_length=100, null=True, blank=True)
     content = models.TextField(null=True, blank=True)
@@ -39,19 +31,19 @@ class Movie(TimeStampedModel):
 
     class Meta:
         ordering = ('-ticketing_rate', 'title', )
-        db_table = 'movie'
+        db_table = 'movies'
 
     def __str__(self):
         return self.title
 
 
-class Image(TimeStampedModel):
+class Image(BaseModel):
     movie = models.ForeignKey(Movie, related_name='images', on_delete=models.CASCADE)
     url = models.URLField()
     type = models.PositiveSmallIntegerField(choices=IMAGE_CHOICES)
 
     class Meta:
-        db_table = 'image'
+        db_table = 'images'
 
 
 class Rating(models.Model):
@@ -60,48 +52,55 @@ class Rating(models.Model):
     score = models.PositiveIntegerField()
 
     class Meta:
-        db_table = 'rating'
+        db_table = 'ratings'
 
 
 class AudienceRating(models.Model):
     grade = models.CharField(max_length=20)
 
     class Meta:
-        db_table = 'audience_rating'
+        db_table = 'audience_ratings'
 
 
 class Tag(models.Model):
     name = models.CharField(max_length=40)
 
     class Meta:
-        db_table = 'tag'
+        db_table = 'tags'
 
 
 class Actor(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
-        db_table = 'actor'
+        db_table = 'actors'
 
 
 class Director(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
-        db_table = 'director'
+        db_table = 'directors'
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=30)
 
     class Meta:
-        db_table = 'genre'
+        db_table = 'genres'
 
 
 class Type(models.Model):
     name = models.CharField(max_length=30)
 
     class Meta:
-        db_table = 'type'
+        db_table = 'types'
 
 
+class Like(models.Model):
+    user = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='likes')
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='likes')
+
+    class Meta:
+        db_table = 'likes'
+        unique_together = ('movie', 'user', )

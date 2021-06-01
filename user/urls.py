@@ -1,9 +1,14 @@
 from django.urls import path
-from . import views
+from rest_framework.routers import DefaultRouter
+
+from .views import UserViewSet, UserLoginView, UserSignUpView
+
+router = DefaultRouter(trailing_slash=False)
+
+router.register(r'users', UserViewSet)
 
 urlpatterns = [
-    path('signup', views.UserSignUpView.as_view(), name='signup'),
-    path('login', views.UserLoginView.as_view(), name='login'),
-    path('profile', views.user_profile, name='user_profile'),
-    path('like', views.LikeViewSet.as_view({'post': 'create'}), name='like_create'),
+    path('signup', UserSignUpView.as_view(), name='signup'),
+    path('login', UserLoginView.as_view(), name='login'),
 ]
+urlpatterns += router.urls

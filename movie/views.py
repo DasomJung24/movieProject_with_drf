@@ -1,7 +1,8 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, generics, status
 from django_filters import rest_framework as filters
+from rest_framework.response import Response
 
-from .serializers import MovieSerializer, MovieDetailSerializer
+from .serializers import MovieSerializer, MovieDetailSerializer, LikeSerializer
 from .models import *
 
 
@@ -19,3 +20,16 @@ class MovieDetailViewSet(viewsets.ModelViewSet):
     lookup_field = 'pk'
     lookup_url_kwarg = 'movie_id'
     queryset = Movie.objects.all()
+
+
+class LikeViewSet(generics.CreateAPIView):
+    serializer_class = LikeSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    model = Like
+
+    def post(self, request, *args, **kwargs):
+        data = {'user_id': request.user.id, 'movie_id': kwargs['movie_id']}
+        serializer = self.serializer_class(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)

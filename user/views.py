@@ -1,13 +1,10 @@
-import json
-
-from django.http import JsonResponse
 from rest_framework import viewsets, permissions, status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
-from .models import User, Like
-from .serializers import UserSignUpSerializer, UserSerializer, LikeSerializer, UserLoginSerializer
+from megabox_clone_project.utils import IsOwnerOrReadOnly
+from .models import User
+from .serializers import UserSignUpSerializer, UserSerializer, UserLoginSerializer
 
 
 class UserSignUpView(generics.CreateAPIView):
@@ -37,35 +34,24 @@ class UserLoginView(APIView):
 
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
-    authentication_classes = [JSONWebTokenAuthentication]
+    authentication_classes = [IsOwnerOrReadOnly]
     model = User
     queryset = User.objects.all()
 
     def get_object(self):
         return self.queryset.get(pk=self.request.user.id)
 
+    def retrieve(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.user)
+        return Response(serializer.data)
 
-user_profile = UserViewSet.as_view({
-    'get': 'retrieve',
-    'put': 'update',
-    'delete': 'destroy',
-})
+    def update(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
-
-class LikeViewSet(generics.CreateAPIView):
-    serializer_class = LikeSerializer
-    permission_classes = [permissions.IsAuthenticated]
-    model = Like
-
-    def post(self, request, *args, **kwargs):
-        try:
-            data = json.loads(request.body)
-            data['user_id'] = request.user.id
-            serializer = LikeSerializer(data)
-            if serializer.is_valid():
-                like, flag = Like.objects.get_or_create(**data)
-                if not flag:
-                    like.delete()
-                return Response(data)
-        except ValueError as e:
-            return JsonResponse({'error': '{}'.format(e)}, status=400)
+    def destroy(self, request, *args, **kwargs):
+        user = self.get_object()
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

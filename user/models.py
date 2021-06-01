@@ -1,21 +1,41 @@
+from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+
+from megabox_clone_project.models import BaseModel
 
 
-class User(AbstractUser):
-    birth = models.DateField()
-    phone_number = models.CharField(max_length=20, unique=True)
+class UserManager(BaseUserManager):
+    def create_user(self, email, name, password=None, **kwargs):
+        if not email:
+            raise ValueError('Users must have an email address')
 
-    created_datetime = models.DateTimeField(auto_now_add=True, blank=True)
-    updated_datetime = models.DateTimeField(auto_now=True, blank=True)
+        user = self.Model(email=self.normalize_email(email), name=name, **kwargs)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, name, password):
+        user = self.create_user(email=email, password=password, name=name, )
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+
+class User(AbstractBaseUser, PermissionsMixin, BaseModel):
+    email = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=32)
+    is_active = models.BooleanField(default=True)
+    phone_number = models.CharField(max_length=32)
+    birth = models.DateField(null=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = [
+        'name',
+    ]
 
     class Meta:
-        db_table = 'user'
+        db_table = 'users'
 
-
-class Like(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes')
-    movie = models.ForeignKey('movie.Movie', on_delete=models.CASCADE, related_name='likes')
-
-    class Meta:
-        db_table = 'like'
+    def __str__(self):
+        return self.name

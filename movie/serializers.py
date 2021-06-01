@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Movie, Image
+from .models import Movie, Image, Like
 
 
 class MovieSerializer(serializers.ModelSerializer):
@@ -64,3 +64,10 @@ class MovieDetailSerializer(serializers.ModelSerializer):
         model = Movie
         fields = ['id', 'title', 'english_title', 'content', 'opening_date', 'running_time', 'ticketing_rate',
                   'audience_rating', 'tag', 'actor', 'director', 'genre', 'type', 'images']
+
+
+class LikeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Like
+        fields = ('user_id', 'movie_id', )
