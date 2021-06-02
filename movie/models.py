@@ -23,7 +23,7 @@ class Movie(BaseModel):
     running_time = models.PositiveIntegerField(null=True, blank=True)
     ticketing_rate = models.DecimalField(max_digits=3, decimal_places=1, default=0.0, null=True, blank=True)
     audience_rating = models.ForeignKey('AudienceRating', on_delete=models.SET_NULL, null=True)
-    tag = models.ForeignKey('Tag', on_delete=models.SET_NULL, null=True, default=None)
+    tag = models.ManyToManyField('Tag')
     actor = models.ManyToManyField('Actor')
     director = models.ManyToManyField('Director')
     genre = models.ManyToManyField('Genre')
