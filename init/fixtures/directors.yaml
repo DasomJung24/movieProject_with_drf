@@ -1,0 +1,40 @@
+- model: movie.director
+  pk: 1
+  fields:
+    name: 저스틴 린
+- model: movie.director
+  pk: 2
+  fields:
+    name: 크레이그 질레스피
+- model: movie.director
+  pk: 3
+  fields:
+    name: 가이 리치
+- model: movie.director
+  pk: 4
+  fields:
+    name: 레니 할린
+- model: movie.director
+  pk: 5
+  fields:
+    name: 소토자키 하루오
+- model: movie.director
+  pk: 6
+  fields:
+    name: 마이클 차베즈
+- model: movie.director
+  pk: 7
+  fields:
+    name: 카키모토 코다이
+- model: movie.director
+  pk: 8
+  fields:
+    name: 이정곤
+- model: movie.director
+  pk: 9
+  fields:
+    name: P.B.셰므란
+- model: movie.director
+  pk: 10
+  fields:
+    name: 유하

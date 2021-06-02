@@ -1,0 +1,36 @@
+- model: movie.genre
+  pk: 1
+  fields:
+    name: 액션
+- model: movie.genre
+  pk: 2
+  fields:
+    name: 드라마
+- model: movie.genre
+  pk: 3
+  fields:
+    name: 범죄
+- model: movie.genre
+  pk: 4
+  fields:
+    name: 코미디
+- model: movie.genre
+  pk: 5
+  fields:
+    name: 스릴러
+- model: movie.genre
+  pk: 6
+  fields:
+    name: 어드벤처
+- model: movie.genre
+  pk: 7
+  fields:
+    name: 애니메이션
+- model: movie.genre
+  pk: 8
+  fields:
+    name: 공포(호러)
+- model: movie.genre
+  pk: 9
+  fields:
+    name: 미스터리

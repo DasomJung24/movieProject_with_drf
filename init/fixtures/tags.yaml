@@ -1,0 +1,20 @@
+- model: movie.tag
+  pk: 1
+  fields:
+    name: 단독
+- model: movie.tag
+  pk: 2
+  fields:
+    name: 돌비시네마
+- model: movie.tag
+  pk: 3
+  fields:
+    name: 빵원티켓+
+- model: movie.tag
+  pk: 4
+  fields:
+    name: 굿즈패키지
+- model: movie.tag
+  pk: 5
+  fields:
+    name: N스크린
