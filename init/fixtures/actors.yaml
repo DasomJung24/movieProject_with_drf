@@ -170,15 +170,3 @@
   pk: 43
   fields:
     name: 태향호
-- model: movie.actor
-  pk: 39
-  fields:
-    name: 서인국
-- model: movie.actor
-  pk: 39
-  fields:
-    name: 서인국
-- model: movie.actor
-  pk: 39
-  fields:
-    name: 서인국
