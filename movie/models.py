@@ -31,7 +31,7 @@ class Movie(BaseModel):
     like_count = models.PositiveIntegerField(default=0)
 
     class Meta:
-        ordering = ('-ticketing_rate', 'title', )
+        ordering = ('-ticketing_rate', 'title', '-id', )
         db_table = 'movies'
 
     def __str__(self):

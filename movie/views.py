@@ -8,15 +8,15 @@ from .serializers import MovieSerializer, MovieDetailSerializer, LikeSerializer
 from .models import *
 
 
-class MovieViewSet(generics.ListAPIView):
+class MovieListView(generics.ListAPIView):
     serializer_class = MovieSerializer
     permission_classes = [permissions.AllowAny]
     filter_backends = [filters.DjangoFilterBackend]
     filterset_fields = ['tag']
-    queryset = Movie.objects.all().prefetch_related('images', 'audience_ratings')
+    queryset = Movie.objects.all().prefetch_related('images', 'audience_rating')
 
 
-class MovieDetailViewSet(generics.RetrieveAPIView):
+class MovieDetailView(generics.RetrieveAPIView):
     serializer_class = MovieDetailSerializer
     permission_classes = [permissions.AllowAny]
     lookup_field = 'pk'
@@ -24,7 +24,7 @@ class MovieDetailViewSet(generics.RetrieveAPIView):
     queryset = Movie.objects.all()
 
 
-class LikeViewSet(CreateModelMixin, DestroyModelMixin, generics.GenericAPIView):
+class LikeView(CreateModelMixin, DestroyModelMixin, generics.GenericAPIView):
     serializer_class = LikeSerializer
     permission_classes = [permissions.IsAuthenticated]
     model = Like

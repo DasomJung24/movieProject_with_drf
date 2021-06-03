@@ -20,7 +20,7 @@ class MovieSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Movie
-        fields = ['id', 'title', 'audience_rating', 'opening_date', 'image']
+        fields = ['id', 'title', 'audience_rating', 'opening_date', 'image', 'ticketing_rate', 'like_count']
 
 
 class MovieDetailSerializer(serializers.ModelSerializer):
@@ -35,7 +35,7 @@ class MovieDetailSerializer(serializers.ModelSerializer):
         slug_field='name'
     )
     tag = serializers.SlugRelatedField(
-        many=False,
+        many=True,
         read_only=True,
         slug_field='name'
     )
@@ -63,7 +63,7 @@ class MovieDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = ['id', 'title', 'english_title', 'content', 'opening_date', 'running_time', 'ticketing_rate',
-                  'audience_rating', 'tag', 'actor', 'director', 'genre', 'type', 'images']
+                  'audience_rating', 'tag', 'actor', 'director', 'genre', 'type', 'images', 'like_count']
 
 
 class LikeSerializer(serializers.ModelSerializer):
