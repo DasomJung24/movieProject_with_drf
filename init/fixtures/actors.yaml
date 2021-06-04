@@ -1,172 +1,172 @@
-- model: movie.actor
+- model: movies.actor
   pk: 1
   fields:
     name: 빈 디젤
-- model: movie.actor
+- model: movies.actor
   pk: 2
   fields:
     name: 존 시나
-- model: movie.actor
+- model: movies.actor
   pk: 3
   fields:
     name: 성 강
-- model: movie.actor
+- model: movies.actor
   pk: 4
   fields:
     name: 샤를리즈 테론
-- model: movie.actor
+- model: movies.actor
   pk: 5
   fields:
     name: 미셸 로드리게즈
-- model: movie.actor
+- model: movies.actor
   pk: 6
   fields:
     name: 조다나 브루스터
-- model: movie.actor
+- model: movies.actor
   pk: 7
   fields:
     name: 헬렌 미렌
-- model: movie.actor
+- model: movies.actor
   pk: 8
   fields:
     name: 엠마 스톤
-- model: movie.actor
+- model: movies.actor
   pk: 9
   fields:
     name: 엠마 톰슨
-- model: movie.actor
+- model: movies.actor
   pk: 10
   fields:
     name: 마크 스트롱
-- model: movie.actor
+- model: movies.actor
   pk: 11
   fields:
     name: 제이슨 스타뎀
-- model: movie.actor
+- model: movies.actor
   pk: 12
   fields:
     name: 스콧 이스트우드
-- model: movie.actor
+- model: movies.actor
   pk: 13
   fields:
     name: 조쉬 하트넷
-- model: movie.actor
+- model: movies.actor
   pk: 14
   fields:
     name: 홀트 맥칼라니
-- model: movie.actor
+- model: movies.actor
   pk: 15
   fields:
     name: 제프리 도노반
-- model: movie.actor
+- model: movies.actor
   pk: 16
   fields:
     name: 제이미 정
-- model: movie.actor
+- model: movies.actor
   pk: 17
   fields:
     name: 피어스 브로스넌
-- model: movie.actor
+- model: movies.actor
   pk: 18
   fields:
     name: 팀 로스
-- model: movie.actor
+- model: movies.actor
   pk: 19
   fields:
     name: 헤르미온느 코필드
-- model: movie.actor
+- model: movies.actor
   pk: 20
   fields:
     name: 닉 캐논
-- model: movie.actor
+- model: movies.actor
   pk: 21
   fields:
     name: 하나에 나츠키
-- model: movie.actor
+- model: movies.actor
   pk: 22
   fields:
     name: 키토 아카리
-- model: movie.actor
+- model: movies.actor
   pk: 23
   fields:
     name: 시모노 히로
-- model: movie.actor
+- model: movies.actor
   pk: 24
   fields:
     name: 마츠오카 요시츠구
-- model: movie.actor
+- model: movies.actor
   pk: 25
   fields:
     name: 히노 사토시
-- model: movie.actor
+- model: movies.actor
   pk: 26
   fields:
     name: 히라카와 다이스케
-- model: movie.actor
+- model: movies.actor
   pk: 27
   fields:
     name: 베라 파미가
-- model: movie.actor
+- model: movies.actor
   pk: 28
   fields:
     name: 패트릭 윌슨
-- model: movie.actor
+- model: movies.actor
   pk: 29
   fields:
     name: 아이바 아이나
-- model: movie.actor
+- model: movies.actor
   pk: 30
   fields:
     name: 쿠도 하루카
-- model: movie.actor
+- model: movies.actor
   pk: 31
   fields:
     name: 나카시마 유키
-- model: movie.actor
+- model: movies.actor
   pk: 32
   fields:
     name: 사쿠라가와 메구
-- model: movie.actor
+- model: movies.actor
   pk: 33
   fields:
     name: 시자키 카논
-- model: movie.actor
+- model: movies.actor
   pk: 34
   fields:
     name: 정재광
-- model: movie.actor
+- model: movies.actor
   pk: 35
   fields:
     name: 이규성
-- model: movie.actor
+- model: movies.actor
   pk: 36
   fields:
     name: 멜 깁슨
-- model: movie.actor
+- model: movies.actor
   pk: 37
   fields:
     name: 숀 펜
-- model: movie.actor
+- model: movies.actor
   pk: 38
   fields:
     name: 배다빈
-- model: movie.actor
+- model: movies.actor
   pk: 39
   fields:
     name: 서인국
-- model: movie.actor
+- model: movies.actor
   pk: 40
   fields:
     name: 이수혁
-- model: movie.actor
+- model: movies.actor
   pk: 41
   fields:
     name: 음문석
-- model: movie.actor
+- model: movies.actor
   pk: 42
   fields:
     name: 유승목
-- model: movie.actor
+- model: movies.actor
   pk: 43
   fields:
     name: 태향호

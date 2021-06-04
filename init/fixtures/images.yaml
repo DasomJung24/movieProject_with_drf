@@ -1,0 +1,144 @@
+- model: movies.image
+  pk: 1
+  fields:
+    created_at: 2021-05-01 07:19:07.056888+00:00
+    updated_at: 2021-05-01 07:19:07.056888+00:00
+    movie: 1
+    type: 1
+    url: https://img.megabox.co.kr/SharedImg/2021/05/10/n0XVEiJdSsiOSlJb8f9lmKSBWVDN6hJW_420.jpg
+- model: movies.image
+  pk: 2
+  fields:
+    created_at: 2021-05-01 07:19:07.156888+00:00
+    updated_at: 2021-05-01 07:19:07.156888+00:00
+    movie: 1
+    type: 2
+    url: https://img.megabox.co.kr/SharedImg/2021/04/23/Lq58hHt7VCIApTdLFwhAEGMYnXksME5a_380.jpg
+- model: movies.image
+  pk: 3
+  fields:
+    created_at: 2021-05-01 07:19:07.256888+00:00
+    updated_at: 2021-05-01 07:19:07.256888+00:00
+    movie: 1
+    type: 3
+    url: https://img.megabox.co.kr/SharedImg/2021/05/04/F2yQAUNjGrzjFLFl6j5VUPusEFn5k0oE_380.jpg
+- model: movies.image
+  pk: 4
+  fields:
+    created_at: 2021-05-01 07:19:07.356888+00:00
+    updated_at: 2021-05-01 07:19:07.356888+00:00
+    movie: 1
+    type: 3
+    url: https://img.megabox.co.kr/SharedImg/2021/05/04/F2yQAUNjGrzjFLFl6j5VUPusEFn5k0oE_380.jpg
+- model: movies.image
+  pk: 5
+  fields:
+    created_at: 2021-05-01 07:19:07.456888+00:00
+    updated_at: 2021-05-01 07:19:07.456888+00:00
+    movie: 1
+    type: 3
+    url: https://img.megabox.co.kr/SharedImg/2021/05/04/F2yQAUNjGrzjFLFl6j5VUPusEFn5k0oE_380.jpg
+- model: movies.image
+  pk: 6
+  fields:
+    created_at: 2021-05-01 07:21:07.056888+00:00
+    updated_at: 2021-05-01 07:21:07.056888+00:00
+    movie: 2
+    type: 1
+    url: https://img.megabox.co.kr/SharedImg/2021/05/12/J7vthd2FWEXswHD67dL2rQrMW4uhJQUF_420.jpg
+- model: movies.image
+  pk: 7
+  fields:
+    created_at: 2021-05-01 07:21:07.156888+00:00
+    updated_at: 2021-05-01 07:21:07.156888+00:00
+    movie: 2
+    type: 2
+    url: https://img.megabox.co.kr/SharedImg/2021/05/03/qQLnqQbHy4OK9tWeDWl18VxXuL6Unxsi_380.jpg
+- model: movies.image
+  pk: 8
+  fields:
+    created_at: 2021-05-01 07:21:07.256888+00:00
+    updated_at: 2021-05-01 07:21:07.256888+00:00
+    movie: 2
+    type: 3
+    url: https://img.megabox.co.kr/SharedImg/2021/04/27/pmA4YuR5jkq3Ovd9XGSUGQFYBiUyVpUd_380.jpg
+- model: movies.image
+  pk: 9
+  fields:
+    created_at: 2021-05-01 07:21:07.356888+00:00
+    updated_at: 2021-05-01 07:21:07.356888+00:00
+    movie: 2
+    type: 3
+    url: https://img.megabox.co.kr/SharedImg/2021/05/03/tJsg5q31GMZzH6YB6uvJgguaP0xR3ZFQ_380.jpg
+- model: movies.image
+  pk: 10
+  fields:
+    created_at: 2021-05-01 07:21:07.456888+00:00
+    updated_at: 2021-05-01 07:21:07.456888+00:00
+    movie: 2
+    type: 3
+    url: https://img.megabox.co.kr/SharedImg/2021/05/03/tEgFFSZAIKq8tDGzlM3S90xFCQKpTWSq_380.jpg
+- model: movies.image
+  pk: 11
+  fields:
+    created_at: 2021-05-01 07:21:07.556888+00:00
+    updated_at: 2021-05-01 07:21:07.556888+00:00
+    movie: 2
+    type: 3
+    url: https://img.megabox.co.kr/SharedImg/2021/05/03/W6CsCFmjy8VTMOEroE37H9ZxiOA0kBe1_380.jpg
+- model: movies.image
+  pk: 12
+  fields:
+    created_at: 2021-05-01 07:21:09.156888+00:00
+    updated_at: 2021-05-01 07:21:09.156888+00:00
+    movie: 3
+    type: 1
+    url: https://img.megabox.co.kr/SharedImg/2021/04/20/Pg9xMYRfMNouXwkqG2PeOGGqyUaQ9skl_420.jpg
+- model: movies.image
+  pk: 13
+  fields:
+    created_at: 2021-05-01 07:21:09.256888+00:00
+    updated_at: 2021-05-01 07:21:09.256888+00:00
+    movie: 3
+    type: 2
+    url: https://img.megabox.co.kr/SharedImg/2021/05/06/WkhMtd7UfrrFwj8wML9FAKAtUKwPPMR5_380.jpg
+- model: movies.image
+  pk: 14
+  fields:
+    created_at: 2021-05-01 07:21:09.356888+00:00
+    updated_at: 2021-05-01 07:21:09.356888+00:00
+    movie: 3
+    type: 3
+    url: https://img.megabox.co.kr/SharedImg/2021/05/06/NWiYSZST5v7PTE4feuXzdRzjZEKhj8Dx_380.jpg
+- model: movies.image
+  pk: 15
+  fields:
+    created_at: 2021-05-01 07:21:09.456888+00:00
+    updated_at: 2021-05-01 07:21:09.456888+00:00
+    movie: 3
+    type: 3
+    url: https://img.megabox.co.kr/SharedImg/2021/05/06/NWiYSZST5v7PTE4feuXzdRzjZEKhj8Dx_380.jpg
+- model: movies.image
+  pk: 16
+  fields:
+    created_at: 2021-05-01 07:21:09.556888+00:00
+    updated_at: 2021-05-01 07:21:09.556888+00:00
+    movie: 3
+    type: 3
+    url: https://img.megabox.co.kr/SharedImg/2021/05/06/4PA3J1Kswi3uDEQUvrlKHeymaCGQVaEX_380.jpg
+- model: movies.image
+  pk: 17
+  fields:
+    created_at: 2021-05-01 07:21:09.656888+00:00
+    updated_at: 2021-05-01 07:21:09.656888+00:00
+    movie: 3
+    type: 3
+    url: https://img.megabox.co.kr/SharedImg/2021/05/06/JOaMHKUv2VOUvofAbqdSAZz5049iB9o5_380.jpg
+- model: movies.image
+  pk: 18
+  fields:
+    created_at: 2021-05-01 07:21:09.756888+00:00
+    updated_at: 2021-05-01 07:21:09.756888+00:00
+    movie: 3
+    type: 3
+    url: https://img.megabox.co.kr/SharedImg/2021/05/06/SNPuudcMtyaDzCNWRYMXMWBb7E17zRIY_380.jpg

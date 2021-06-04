@@ -99,9 +99,9 @@ class Type(models.Model):
 
 
 class Like(models.Model):
-    user = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='likes')
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='likes')
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='likes')
 
     class Meta:
         db_table = 'likes'
-        unique_together = ('movie', 'user', )
+        unique_together = ('movies', 'users', )

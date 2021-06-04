@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('movie', '0001_initial'),
+        ('movies', '0001_initial'),
     ]
 
     operations = [
@@ -54,7 +54,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=30)),
-                ('city', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reservation.city')),
+                ('city', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reservations.city')),
             ],
             options={
                 'db_table': 'theaters',
@@ -80,9 +80,9 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('start_datetime', models.DateTimeField()),
                 ('is_screened', models.BooleanField()),
-                ('movie', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movie.movie')),
-                ('screen', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reservation.screen')),
-                ('theater', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reservation.theater')),
+                ('movies', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.movies')),
+                ('screen', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reservations.screen')),
+                ('theater', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reservations.theater')),
             ],
             options={
                 'db_table': 'theater_screens',
@@ -93,16 +93,16 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('seat', models.IntegerField()),
-                ('reservation', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reservation.reservation')),
-                ('ticket_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reservation.tickettype')),
+                ('reservations', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reservations.reservations')),
+                ('ticket_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reservations.tickettype')),
             ],
             options={
                 'db_table': 'reservation_items',
             },
         ),
         migrations.AddField(
-            model_name='reservation',
+            model_name='reservations',
             name='theater_screen',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reservation.theaterscreen'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reservations.theaterscreen'),
         ),
     ]

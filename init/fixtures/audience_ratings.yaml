@@ -1,16 +1,16 @@
-- model: movie.audiencerating
+- model: movies.audiencerating
   pk: 1
   fields:
     grade: 전체관람가
-- model: movie.audiencerating
+- model: movies.audiencerating
   pk: 2
   fields:
     grade: 12세이상관람가
-- model: movie.audiencerating
+- model: movies.audiencerating
   pk: 3
   fields:
     grade: 15세이상관람가
-- model: movie.audiencerating
+- model: movies.audiencerating
   pk: 4
   fields:
     grade: 청소년관람불가

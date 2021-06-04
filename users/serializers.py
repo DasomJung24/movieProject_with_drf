@@ -11,7 +11,7 @@ class UserSignUpSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'name', 'birth', 'phone_number', 'password', 'email', )
+        fields = ('id', 'email', 'name', 'birth', 'phone_number', 'password', )
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
@@ -19,7 +19,7 @@ class UserSignUpSerializer(serializers.ModelSerializer):
 
 class UserLoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=255)
-    name = serializers.CharField(max_length=32)
+    name = serializers.CharField(max_length=32, read_only=True)
     password = serializers.CharField(write_only=True)
     token = serializers.CharField(max_length=255, read_only=True)
 
@@ -38,7 +38,7 @@ class UserLoginSerializer(serializers.Serializer):
             )
 
         try:
-            user = User.objects.get(email=email, is_staff=False)
+            user = User.objects.get(email=email)
         except User.DoesNotExist:
             raise serializers.ValidationError(_('LOGIN_EMAIL_PASSWORD_WRONG'))
 

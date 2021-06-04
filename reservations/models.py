@@ -26,7 +26,7 @@ class City(models.Model):
 class TheaterScreen(BaseModel):
     theater = models.ForeignKey(Theater, on_delete=models.CASCADE)
     screen = models.ForeignKey('Screen', on_delete=models.CASCADE)
-    movie = models.ForeignKey('movie.Movie', on_delete=models.CASCADE)
+    movie = models.ForeignKey('movies.Movie', on_delete=models.CASCADE)
     start_datetime = models.DateTimeField()
     is_screened = models.BooleanField()
 

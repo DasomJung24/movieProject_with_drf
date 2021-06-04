@@ -41,12 +41,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'django_extensions',
     'rest_framework_jwt',
     'drf_yasg',
     'django_filters',
-    'user',
-    'movie',
-    'reservation',
+    'users',
+    'movies',
+    'reservations',
 ]
 
 MIDDLEWARE = [
@@ -94,7 +95,7 @@ WSGI_APPLICATION = 'megabox_clone_project.wsgi.application'
 
 DATABASES = my_settings.DATABASES
 
-AUTH_USER_MODEL = 'user.User'
+AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (

@@ -1,16 +1,16 @@
-- model: movie.type
+- model: movies.type
   pk: 1
   fields:
     name: 2D ATMOS(자막)
-- model: movie.type
+- model: movies.type
   pk: 2
   fields:
     name: 2D Dolby(자막)
-- model: movie.type
+- model: movies.type
   pk: 3
   fields:
     name: 2D(자막)
-- model: movie.type
+- model: movies.type
   pk: 4
   fields:
     name: 2D

@@ -6,12 +6,12 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('movie', '0002_auto_20210601_1717'),
+        ('movies', '0002_auto_20210601_1717'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='movie',
+            model_name='movies',
             name='like_count',
             field=models.PositiveIntegerField(default=0),
         ),

@@ -11,62 +11,62 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('movie', '0001_initial'),
+        ('movies', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='rating',
-            name='user',
+            name='users',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
-            model_name='movie',
+            model_name='movies',
             name='actor',
-            field=models.ManyToManyField(to='movie.Actor'),
+            field=models.ManyToManyField(to='movies.Actor'),
         ),
         migrations.AddField(
-            model_name='movie',
+            model_name='movies',
             name='audience_rating',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='movie.audiencerating'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='movies.audiencerating'),
         ),
         migrations.AddField(
-            model_name='movie',
+            model_name='movies',
             name='director',
-            field=models.ManyToManyField(to='movie.Director'),
+            field=models.ManyToManyField(to='movies.Director'),
         ),
         migrations.AddField(
-            model_name='movie',
+            model_name='movies',
             name='genre',
-            field=models.ManyToManyField(to='movie.Genre'),
+            field=models.ManyToManyField(to='movies.Genre'),
         ),
         migrations.AddField(
-            model_name='movie',
+            model_name='movies',
             name='tag',
-            field=models.ForeignKey(default=None, null=True, on_delete=django.db.models.deletion.SET_NULL, to='movie.tag'),
+            field=models.ForeignKey(default=None, null=True, on_delete=django.db.models.deletion.SET_NULL, to='movies.tag'),
         ),
         migrations.AddField(
-            model_name='movie',
+            model_name='movies',
             name='type',
-            field=models.ManyToManyField(to='movie.Type'),
+            field=models.ManyToManyField(to='movies.Type'),
         ),
         migrations.AddField(
             model_name='like',
-            name='movie',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='likes', to='movie.movie'),
+            name='movies',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='likes', to='movies.movies'),
         ),
         migrations.AddField(
             model_name='like',
-            name='user',
+            name='users',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='likes', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='image',
-            name='movie',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='movie.movie'),
+            name='movies',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='movies.movies'),
         ),
         migrations.AlterUniqueTogether(
             name='like',
-            unique_together={('movie', 'user')},
+            unique_together={('movies', 'users')},
         ),
     ]

@@ -41,4 +41,4 @@ class TheaterTodaySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TheaterScreen
-        fields = ['id', 'screen', 'theater', 'movie', 'start_datetime', ]
+        fields = ['id', 'screen', 'theater', 'movies', 'start_datetime', ]

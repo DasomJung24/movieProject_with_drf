@@ -13,9 +13,7 @@ class UserSignUpView(generics.CreateAPIView):
     model = User
 
     def post(self, request, *args, **kwargs):
-        data = request.data.get('user', None)
-        data['birth'] = data['birth'].split('T')[0]
-        serializer = self.serializer_class(data=data)
+        serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)

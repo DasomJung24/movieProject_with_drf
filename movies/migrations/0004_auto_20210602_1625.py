@@ -6,17 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('movie', '0003_movie_like_count'),
+        ('movies', '0003_movie_like_count'),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='movie',
+            model_name='movies',
             name='tag',
         ),
         migrations.AddField(
-            model_name='movie',
+            model_name='movies',
             name='tag',
-            field=models.ManyToManyField(to='movie.Tag'),
+            field=models.ManyToManyField(to='movies.Tag'),
         ),
     ]

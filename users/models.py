@@ -10,7 +10,7 @@ class UserManager(BaseUserManager):
         if not email:
             raise ValueError('Users must have an email address')
 
-        user = self.Model(email=self.normalize_email(email), name=name, **kwargs)
+        user = self.model(email=self.normalize_email(email), name=name, **kwargs)
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -28,6 +28,8 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     is_active = models.BooleanField(default=True)
     phone_number = models.CharField(max_length=32)
     birth = models.DateField(null=True)
+
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [
