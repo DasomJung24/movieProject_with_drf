@@ -1,0 +1,32 @@
+- model: theaters.city
+  pk: 1
+  fields:
+    name: 서울
+- model: theaters.city
+  pk: 2
+  fields:
+    name: 경기
+- model: theaters.city
+  pk: 3
+  fields:
+    name: 인천
+- model: theaters.city
+  pk: 4
+  fields:
+    name: 대전/충청/세종
+- model: theaters.city
+  pk: 5
+  fields:
+    name: 부산/대구/경상
+- model: theaters.city
+  pk: 6
+  fields:
+    name: 광주/전라
+- model: theaters.city
+  pk: 7
+  fields:
+    name: 강원
+- model: theaters.city
+  pk: 8
+  fields:
+    name: 제주

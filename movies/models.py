@@ -104,4 +104,4 @@ class Like(models.Model):
 
     class Meta:
         db_table = 'likes'
-        unique_together = ('movies', 'users', )
+        unique_together = ('movie', 'user', )

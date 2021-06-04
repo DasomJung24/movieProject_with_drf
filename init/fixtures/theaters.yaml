@@ -1,0 +1,200 @@
+- model: theaters.theater
+  pk: 1
+  fields:
+    name: 강남
+    city: 1
+- model: theaters.theater
+  pk: 2
+  fields:
+    name: 강남대로(씨티)
+    city: 1
+- model: theaters.theater
+  pk: 3
+  fields:
+    name: 강동
+    city: 1
+- model: theaters.theater
+  pk: 4
+  fields:
+    name: 군자
+    city: 1
+- model: theaters.theater
+  pk: 5
+  fields:
+    name: 동대문
+    city: 1
+- model: theaters.theater
+  pk: 6
+  fields:
+    name: 마곡
+    city: 1
+- model: theaters.theater
+  pk: 7
+  fields:
+    name: 목동
+    city: 1
+- model: theaters.theater
+  pk: 8
+  fields:
+    name: 상봉
+    city: 1
+- model: theaters.theater
+  pk: 9
+  fields:
+    name: 상암월드컵경기장
+    city: 1
+- model: theaters.theater
+  pk: 10
+  fields:
+    name: 고양스타필드
+    city: 2
+- model: theaters.theater
+  pk: 11
+  fields:
+    name: 김포한강신도시
+    city: 2
+- model: theaters.theater
+  pk: 12
+  fields:
+    name: 남양주
+    city: 2
+- model: theaters.theater
+  pk: 13
+  fields:
+    name: 남양주현대아울렛 스페이스원
+    city: 2
+- model: theaters.theater
+  pk: 14
+  fields:
+    name: 동탄
+    city: 2
+- model: theaters.theater
+  pk: 15
+  fields:
+    name: 미사강변
+    city: 2
+- model: theaters.theater
+  pk: 16
+  fields:
+    name: 검단
+    city: 3
+- model: theaters.theater
+  pk: 17
+  fields:
+    name: 송도
+    city: 3
+- model: theaters.theater
+  pk: 18
+  fields:
+    name: 공주
+    city: 4
+- model: theaters.theater
+  pk: 19
+  fields:
+    name: 논산
+    city: 4
+- model: theaters.theater
+  pk: 20
+  fields:
+    name: 대전
+    city: 4
+- model: theaters.theater
+  pk: 21
+  fields:
+    name: 대전유성
+    city: 4
+- model: theaters.theater
+  pk: 22
+  fields:
+    name: 세종(조치원)
+    city: 4
+- model: theaters.theater
+  pk: 23
+  fields:
+    name: 오창
+    city: 4
+- model: theaters.theater
+  pk: 24
+  fields:
+    name: 제천
+    city: 4
+- model: theaters.theater
+  pk: 25
+  fields:
+    name: 마산
+    city: 5
+- model: theaters.theater
+  pk: 26
+  fields:
+    name: 삼천포
+    city: 5
+- model: theaters.theater
+  pk: 27
+  fields:
+    name: 울산
+    city: 5
+- model: theaters.theater
+  pk: 28
+  fields:
+    name: 창원
+    city: 5
+- model: theaters.theater
+  pk: 29
+  fields:
+    name: 부산극장
+    city: 5
+- model: theaters.theater
+  pk: 30
+  fields:
+    name: 광주하남
+    city: 6
+- model: theaters.theater
+  pk: 31
+  fields:
+    name: 송천
+    city: 6
+- model: theaters.theater
+  pk: 32
+  fields:
+    name: 순천
+    city: 6
+- model: theaters.theater
+  pk: 33
+  fields:
+    name: 남춘천
+    city: 7
+- model: theaters.theater
+  pk: 34
+  fields:
+    name: 원주
+    city: 7
+- model: theaters.theater
+  pk: 35
+  fields:
+    name: 속초
+    city: 7
+- model: theaters.theater
+  pk: 36
+  fields:
+    name: 제주
+    city: 8
+- model: theaters.theater
+  pk: 37
+  fields:
+    name: 화곡
+    city: 1
+- model: theaters.theater
+  pk: 38
+  fields:
+    name: 홍대
+    city: 1
+- model: theaters.theater
+  pk: 39
+  fields:
+    name: 창동
+    city: 1
+- model: theaters.theater
+  pk: 40
+  fields:
+    name: 송파파크하비오
+    city: 1

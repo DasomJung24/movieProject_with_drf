@@ -1,0 +1,40 @@
+- model: theaters.screen
+  pk: 1
+  fields:
+    number: 1
+- model: theaters.screen
+  pk: 2
+  fields:
+    number: 2
+- model: theaters.screen
+  pk: 3
+  fields:
+    number: 3
+- model: theaters.screen
+  pk: 4
+  fields:
+    number: 4
+- model: theaters.screen
+  pk: 5
+  fields:
+    number: 5
+- model: theaters.screen
+  pk: 6
+  fields:
+    number: 6
+- model: theaters.screen
+  pk: 7
+  fields:
+    number: 7
+- model: theaters.screen
+  pk: 8
+  fields:
+    number: 8
+- model: theaters.screen
+  pk: 9
+  fields:
+    number: 9
+- model: theaters.screen
+  pk: 10
+  fields:
+    number: 10
