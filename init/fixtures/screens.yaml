@@ -1,40 +1,115 @@
-- model: theaters.screen
+- model: theaters.theaterscreen
   pk: 1
   fields:
-    number: 1
-- model: theaters.screen
+    theater: 1
+    screen: 1
+- model: theaters.theaterscreen
   pk: 2
   fields:
-    number: 2
-- model: theaters.screen
+    theater: 1
+    screen: 2
+- model: theaters.theaterscreen
   pk: 3
   fields:
-    number: 3
-- model: theaters.screen
+    theater: 1
+    screen: 3
+- model: theaters.theaterscreen
   pk: 4
   fields:
-    number: 4
-- model: theaters.screen
+    theater: 1
+    screen: 4
+- model: theaters.theaterscreen
   pk: 5
   fields:
-    number: 5
-- model: theaters.screen
+    theater: 1
+    screen: 5
+- model: theaters.theaterscreen
   pk: 6
   fields:
-    number: 6
-- model: theaters.screen
+    theater: 1
+    screen: 6
+- model: theaters.theaterscreen
   pk: 7
   fields:
-    number: 7
-- model: theaters.screen
+    theater: 2
+    screen: 1
+- model: theaters.theaterscreen
   pk: 8
   fields:
-    number: 8
-- model: theaters.screen
+    theater: 2
+    screen: 2
+- model: theaters.theaterscreen
   pk: 9
   fields:
-    number: 9
-- model: theaters.screen
+    theater: 2
+    screen: 3
+- model: theaters.theaterscreen
   pk: 10
   fields:
-    number: 10
+    theater: 2
+    screen: 4
+- model: theaters.theaterscreen
+  pk: 11
+  fields:
+    theater: 2
+    screen: 5
+- model: theaters.theaterscreen
+  pk: 12
+  fields:
+    theater: 2
+    screen: 6
+- model: theaters.theaterscreen
+  pk: 13
+  fields:
+    theater: 2
+    screen: 7
+- model: theaters.theaterscreen
+  pk: 14
+  fields:
+    theater: 3
+    screen: 1
+- model: theaters.theaterscreen
+  pk: 15
+  fields:
+    theater: 3
+    screen: 2
+- model: theaters.theaterscreen
+  pk: 16
+  fields:
+    theater: 3
+    screen: 3
+- model: theaters.theaterscreen
+  pk: 17
+  fields:
+    theater: 3
+    screen: 4
+- model: theaters.theaterscreen
+  pk: 18
+  fields:
+    theater: 4
+    screen: 1
+- model: theaters.theaterscreen
+  pk: 19
+  fields:
+    theater: 4
+    screen: 2
+- model: theaters.theaterscreen
+  pk: 20
+  fields:
+    theater: 4
+    screen: 3
+- model: theaters.theaterscreen
+  pk: 21
+  fields:
+    theater: 4
+    screen: 4
+- model: theaters.theaterscreen
+  pk: 22
+  fields:
+    theater: 4
+    screen: 5
+- model: theaters.theaterscreen
+  pk: 23
+  fields:
+    theater: 4
+    screen: 6

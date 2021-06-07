@@ -1,0 +1,330 @@
+- model: theaters.seat
+  pk: 1
+  fields:
+    row: A
+    number: 2
+    screen: 1
+- model: theaters.seat
+  pk: 2
+  fields:
+    row: A
+    number: 3
+    screen: 1
+- model: theaters.seat
+  pk: 3
+  fields:
+    row: A
+    number: 4
+    screen: 1
+- model: theaters.seat
+  pk: 4
+  fields:
+    row: A
+    number: 5
+    screen: 1
+- model: theaters.seat
+  pk: 5
+  fields:
+    row: A
+    number: 6
+    screen: 1
+- model: theaters.seat
+  pk: 6
+  fields:
+    row: A
+    number: 7
+    screen: 1
+- model: theaters.seat
+  pk: 7
+  fields:
+    row: A
+    number: 8
+    screen: 1
+- model: theaters.seat
+  pk: 8
+  fields:
+    row: A
+    number: 9
+    screen: 1
+- model: theaters.seat
+  pk: 9
+  fields:
+    row: A
+    number: 10
+    screen: 1
+- model: theaters.seat
+  pk: 10
+  fields:
+    row: A
+    number: 11
+    screen: 1
+- model: theaters.seat
+  pk: 11
+  fields:
+    row: A
+    number: 12
+    screen: 1
+- model: theaters.seat
+  pk: 12
+  fields:
+    row: A
+    number: 13
+    screen: 1
+- model: theaters.seat
+  pk: 13
+  fields:
+    row: A
+    number: 14
+    screen: 1
+- model: theaters.seat
+  pk: 14
+  fields:
+    row: A
+    number: 15
+    screen: 1
+- model: theaters.seat
+  pk: 15
+  fields:
+    row: A
+    number: 16
+    screen: 1
+- model: theaters.seat
+  pk: 16
+  fields:
+    row: A
+    number: 17
+    screen: 1
+- model: theaters.seat
+  pk: 17
+  fields:
+    row: A
+    number: 18
+    screen: 1
+- model: theaters.seat
+  pk: 18
+  fields:
+    row: A
+    number: 19
+    screen: 1
+- model: theaters.seat
+  pk: 19
+  fields:
+    row: A
+    number: 20
+    screen: 1
+- model: theaters.seat
+  pk: 20
+  fields:
+    row: A
+    number: 21
+    screen: 1
+- model: theaters.seat
+  pk: 21
+  fields:
+    row: B
+    number: 1
+    screen: 1
+- model: theaters.seat
+  pk: 22
+  fields:
+    row: B
+    number: 2
+    screen: 1
+- model: theaters.seat
+  pk: 23
+  fields:
+    row: B
+    number: 3
+    screen: 1
+- model: theaters.seat
+  pk: 24
+  fields:
+    row: B
+    number: 4
+    screen: 1
+- model: theaters.seat
+  pk: 25
+  fields:
+    row: B
+    number: 5
+    screen: 1
+- model: theaters.seat
+  pk: 26
+  fields:
+    row: B
+    number: 6
+    screen: 1
+- model: theaters.seat
+  pk: 27
+  fields:
+    row: B
+    number: 7
+    screen: 1
+- model: theaters.seat
+  pk: 28
+  fields:
+    row: B
+    number: 8
+    screen: 1
+- model: theaters.seat
+  pk: 29
+  fields:
+    row: B
+    number: 9
+    screen: 1
+- model: theaters.seat
+  pk: 30
+  fields:
+    row: B
+    number: 10
+    screen: 1
+- model: theaters.seat
+  pk: 31
+  fields:
+    row: B
+    number: 11
+    screen: 1
+- model: theaters.seat
+  pk: 32
+  fields:
+    row: B
+    number: 12
+    screen: 1
+- model: theaters.seat
+  pk: 33
+  fields:
+    row: B
+    number: 13
+    screen: 1
+- model: theaters.seat
+  pk: 34
+  fields:
+    row: B
+    number: 14
+    screen: 1
+- model: theaters.seat
+  pk: 35
+  fields:
+    row: B
+    number: 15
+    screen: 1
+- model: theaters.seat
+  pk: 36
+  fields:
+    row: B
+    number: 16
+    screen: 1
+- model: theaters.seat
+  pk: 37
+  fields:
+    row: B
+    number: 17
+    screen: 1
+- model: theaters.seat
+  pk: 38
+  fields:
+    row: B
+    number: 18
+    screen: 1
+- model: theaters.seat
+  pk: 39
+  fields:
+    row: B
+    number: 19
+    screen: 1
+- model: theaters.seat
+  pk: 40
+  fields:
+    row: B
+    number: 20
+    screen: 1
+- model: theaters.seat
+  pk: 41
+  fields:
+    row: B
+    number: 21
+    screen: 1
+- model: theaters.seat
+  pk: 42
+  fields:
+    row: B
+    number: 22
+    screen: 1
+- model: theaters.seat
+  pk: 43
+  fields:
+    row: B
+    number: 11
+    screen: 1
+- model: theaters.seat
+  pk: 44
+  fields:
+    row: A
+    number: 12
+    screen: 1
+- model: theaters.seat
+  pk: 45
+  fields:
+    row: A
+    number: 2
+    screen: 1
+- model: theaters.seat
+  pk: 46
+  fields:
+    row: A
+    number: 3
+    screen: 1
+- model: theaters.seat
+  pk: 47
+  fields:
+    row: A
+    number: 4
+    screen: 1
+- model: theaters.seat
+  pk: 48
+  fields:
+    row: A
+    number: 5
+    screen: 1
+- model: theaters.seat
+  pk: 49
+  fields:
+    row: A
+    number: 6
+    screen: 1
+- model: theaters.seat
+  pk: 50
+  fields:
+    row: A
+    number: 7
+    screen: 1
+- model: theaters.seat
+  pk: 51
+  fields:
+    row: A
+    number: 8
+    screen: 1
+- model: theaters.seat
+  pk: 52
+  fields:
+    row: A
+    number: 9
+    screen: 1
+- model: theaters.seat
+  pk: 53
+  fields:
+    row: A
+    number: 10
+    screen: 1
+- model: theaters.seat
+  pk: 54
+  fields:
+    row: A
+    number: 11
+    screen: 1
+- model: theaters.seat
+  pk: 55
+  fields:
+    row: A
+    number: 12
+    screen: 1
