@@ -31,7 +31,7 @@ class Command(BaseCommand):
 
         for r in row:
             for n in number:
-                if n != 7 or n != 8:
+                if n != 7 and n != 8:
                     seat = dict()
                     seat['seat'] = r + str(n)
                     seat['status'] = 'normal'

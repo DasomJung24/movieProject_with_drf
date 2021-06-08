@@ -25,7 +25,7 @@ class City(models.Model):
 class TheaterScreen(models.Model):
     theater = models.ForeignKey(Theater, on_delete=models.CASCADE)
     screen = models.PositiveIntegerField()
-    meta = models.JSONField(default=dict())
+    meta = models.JSONField(default=dict)
 
     class Meta:
         db_table = 'theater_screens'

@@ -13,7 +13,16 @@ class MovieListView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
     filter_backends = [filters.DjangoFilterBackend]
     filterset_fields = ['tag']
-    queryset = Movie.objects.all().prefetch_related('images', 'audience_rating')
+    queryset = Movie.objects.prefetch_related('images', 'audience_rating')
+
+    def get_queryset(self):
+        params = self.request.query_params.get('title', None)
+        return self.queryset.filter(title__contains=params) if params else self.queryset.all()
+
+    def get(self, request, *args, **kwargs):
+        page = self.paginate_queryset(self.get_queryset())
+        serializer = self.get_serializer(page, many=True)
+        return self.get_paginated_response(serializer.data)
 
 
 class MovieDetailView(generics.RetrieveAPIView):
