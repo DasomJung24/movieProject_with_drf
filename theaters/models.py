@@ -22,19 +22,19 @@ class City(models.Model):
         db_table = 'cities'
 
 
-class TheaterScreen(BaseModel):
+class TheaterScreen(models.Model):
     theater = models.ForeignKey(Theater, on_delete=models.CASCADE)
-    screen = models.ForeignKey('Screen', on_delete=models.CASCADE)
-    movie = models.ForeignKey('movies.Movie', on_delete=models.CASCADE)
-    start_datetime = models.DateTimeField()
-    is_screened = models.BooleanField()
+    screen = models.PositiveIntegerField()
+    meta = models.JSONField(default=dict())
 
     class Meta:
         db_table = 'theater_screens'
 
 
-class Screen(models.Model):
-    number = models.PositiveIntegerField()
+class Screening(BaseModel):
+    theater_screen = models.ForeignKey(TheaterScreen, on_delete=models.CASCADE)
+    movie = models.ForeignKey('movies.Movie', on_delete=models.CASCADE)
+    started_at = models.DateTimeField()
 
     class Meta:
-        db_table = 'screens'
+        db_table = 'screenings'

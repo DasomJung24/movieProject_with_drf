@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_auth',
     'django_extensions',
+    'django_seed',
     'rest_framework_jwt',
     'drf_yasg',
     'django_filters',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'movies',
     'reservations',
     'theaters',
+    'init',
 ]
 
 MIDDLEWARE = [
