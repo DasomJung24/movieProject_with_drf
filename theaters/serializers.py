@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from theaters.models import Theater, Screening
+from movies.serializers import MovieDetailSerializer
+from theaters.models import Theater, Screening, TheaterScreen
 
 
 class TheaterSerializer(serializers.ModelSerializer):
@@ -16,6 +17,12 @@ class TheaterSerializer(serializers.ModelSerializer):
 
 
 class ScreeningSerializer(serializers.ModelSerializer):
+    movie = MovieDetailSerializer(many=False)
+    theater_screen = serializers.SerializerMethodField()
+
     class Meta:
         model = Screening
-        fields = '__all__'
+        fields = ['id', 'theater_screen', 'movie', 'started_at']
+
+    def get_theater_screen(self, obj):
+        return TheaterScreen.objects.get(id=obj.theater_screen_id)
