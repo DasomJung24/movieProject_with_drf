@@ -67,9 +67,7 @@ MIDDLEWARE = [
 # CORS 관련 추가
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8000',
     'http://localhost:8080',
-    'http://localhost:8081'
 ]
 
 ROOT_URLCONF = 'megabox_clone_project.urls'
