@@ -22,7 +22,9 @@ class MovieListView(generics.ListAPIView):
         active_type = self.request.query_params.get('active_type', None)
 
         if active_type == 'not_open':
-            queryset = self.queryset.filter(opening_date__gt=timezone.now().date()).order_by('opening_date')
+            order_type = self.request.query_params.get('active_order', None)
+            queryset = self.queryset.filter(opening_date__gt=timezone.now().date())
+            queryset = queryset.order_by('opening_date') if order_type == 'date' else queryset.order_by('title')
         elif active_type == 'special':
             queryset = self.queryset.filter(tag__name='특별상영')
         else:
