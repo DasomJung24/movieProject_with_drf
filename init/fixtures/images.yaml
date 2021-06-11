@@ -142,3 +142,11 @@
     movie: 3
     type: 3
     url: https://img.megabox.co.kr/SharedImg/2021/05/06/SNPuudcMtyaDzCNWRYMXMWBb7E17zRIY_380.jpg
+- model: movies.image
+  pk: 19
+  fields:
+    created_at: 2021-05-01 07:21:09.756888+00:00
+    updated_at: 2021-05-01 07:21:09.756888+00:00
+    movie: 31
+    type: 1
+    url: https://img.megabox.co.kr/SharedImg/2021/05/25/Gba1Q813Z8GRh9ymiBSfJl3HVL1WaDxK_420.jpg

@@ -1,3 +1,4 @@
+from django.utils import timezone
 from rest_framework import permissions, generics, status
 from django_filters import rest_framework as filters
 from rest_framework.exceptions import NotFound
@@ -13,11 +14,26 @@ class MovieListView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
     filter_backends = [filters.DjangoFilterBackend]
     filterset_fields = ['tag']
-    queryset = Movie.objects.prefetch_related('images', 'audience_rating')
+    queryset = Movie.objects.prefetch_related('images', 'audience_rating', 'tag')
 
     def get_queryset(self):
-        params = self.request.query_params.get('title', None)
-        return self.queryset.filter(title__contains=params) if params else self.queryset.all()
+        title = self.request.query_params.get('title', None)
+        is_open = self.request.query_params.get('is_open', None)
+        active_type = self.request.query_params.get('active_type', None)
+
+        if active_type == 'not_open':
+            queryset = self.queryset.filter(opening_date__gt=timezone.now().date()).order_by('opening_date')
+        elif active_type == 'special':
+            queryset = self.queryset.filter(tag__name='특별상영')
+        else:
+            queryset = self.queryset.exclude(tag__name='특별상영')
+
+        if title:
+            return queryset.filter(title__contains=title)
+        elif is_open == 'true':
+            return queryset.filter(opening_date__lte=timezone.now().date())
+        else:
+            return queryset
 
     def get(self, request, *args, **kwargs):
         page = self.paginate_queryset(self.get_queryset())

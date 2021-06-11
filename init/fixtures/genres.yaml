@@ -34,3 +34,7 @@
   pk: 9
   fields:
     name: 미스터리
+- model: movies.genre
+  pk: 10
+  fields:
+    name: 판타지
