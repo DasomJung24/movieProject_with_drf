@@ -17,9 +17,13 @@ class MovieListView(generics.ListAPIView):
     queryset = Movie.objects.prefetch_related('images', 'audience_rating', 'tag')
 
     def get_queryset(self):
+        main = self.request.query_params.get('main', None)
         title = self.request.query_params.get('title', None)
         is_open = self.request.query_params.get('is_open', None)
         active_type = self.request.query_params.get('active_type', None)
+
+        if main:
+            return self.queryset.exclude(tag__name='특별상영')[0:4]
 
         if active_type == 'not_open':
             order_type = self.request.query_params.get('active_order', None)

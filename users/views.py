@@ -1,4 +1,5 @@
 from rest_framework import viewsets, permissions, status, generics
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -53,3 +54,12 @@ class UserViewSet(viewsets.ModelViewSet):
         user = self.get_object()
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def confirm_email(request):
+    if User.objects.filter(email=request.data['email']):
+        return Response({'email': True, 'data': request.data})
+    else:
+        return Response({'email': False, 'data': request.data})
