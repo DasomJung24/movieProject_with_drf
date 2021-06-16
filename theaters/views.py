@@ -1,3 +1,4 @@
+from collections import defaultdict
 from datetime import datetime
 
 from django.db.models import Q
@@ -13,6 +14,18 @@ class TheaterListView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = TheaterSerializer
     queryset = Theater.objects.select_related('city')
+
+    def get(self, request, *args, **kwargs):
+        original = self.request.query_params.get('original', False)
+        queryset = self.get_queryset().all()
+        if original:
+            serializer = self.serializer_class(queryset, many=True)
+            return Response(serializer.data)
+        else:
+            default = defaultdict(list)
+            for theater in queryset:
+                default[theater.city.name].append({'id': theater.id, 'name': theater.name})
+            return Response(default)
 
 
 class ScreeningListView(generics.ListAPIView):

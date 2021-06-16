@@ -42,3 +42,12 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
 
     def __str__(self):
         return self.name
+
+
+class FavoriteTheater(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorites')
+    theater = models.ForeignKey('theaters.Theater', on_delete=models.CASCADE, related_name='favorites')
+
+    class Meta:
+        db_table = 'favorite_theaters'
+        unique_together = ('theater', 'user')

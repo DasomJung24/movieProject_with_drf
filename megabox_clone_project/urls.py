@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('movies.urls')),
     path('', include('users.urls')),
+    path('', include('theaters.urls')),
     path('reservations', include('reservations.urls')),
     url(r'^swagger(?P<format>\.json|\.yaml)/v1$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/v1/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
