@@ -3,18 +3,46 @@ from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 from django.utils.translation import ugettext as _
 
-from .models import User
+from megabox_clone_project.utils import str_to_bool
+from theaters.models import Theater
+from .models import User, FavoriteTheater
 
 
 class UserSignUpSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=128, min_length=8, write_only=True)
+    theaters = serializers.SerializerMethodField(required=False)
+    is_unmanned_ticket = serializers.BooleanField(required=False)
+    is_marketing = serializers.BooleanField(required=False)
 
     class Meta:
         model = User
-        fields = ('id', 'email', 'name', 'birth', 'phone_number', 'password', 'is_unmanned_ticket', )
+        fields = (
+            'id',
+            'email',
+            'name',
+            'birth',
+            'phone_number',
+            'password',
+            'is_unmanned_ticket',
+            'is_marketing',
+            'receive_settings',
+            'theaters',
+        )
 
     def create(self, validated_data):
-        return User.objects.create_user(**validated_data)
+        data = self.context.get('data', {})
+        user = User.objects.create_user(**validated_data)
+        theaters = [FavoriteTheater(theater_id=i['id'], user_id=user.id) for i in data['theaters']]
+
+        if len(theaters) > 0:
+            user.favorites.all().delete()
+            FavoriteTheater.objects.bulk_create(theaters)
+
+        return user
+
+    def get_theaters(self, obj):
+        theaters = obj.favorites.all()
+        return [{'id': t.id, 'user': t.user_id, 'theater': t.theater_id} for t in theaters]
 
 
 class UserLoginSerializer(serializers.Serializer):

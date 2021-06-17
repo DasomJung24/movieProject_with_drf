@@ -4,17 +4,19 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from megabox_clone_project.utils import IsOwnerOrReadOnly
-from .models import User
-from .serializers import UserSignUpSerializer, UserSerializer, UserLoginSerializer
+from .models import User, FavoriteTheater
+from .serializers import UserSignUpSerializer, UserSerializer, UserLoginSerializer, UserFavoriteSerializer
 
 
 class UserSignUpView(generics.CreateAPIView):
     serializer_class = UserSignUpSerializer
     permission_classes = [permissions.AllowAny]
-    model = User
 
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data)
+        context = {
+            'data': request.data
+        }
+        serializer = self.serializer_class(data=request.data, context=context)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -23,7 +25,6 @@ class UserSignUpView(generics.CreateAPIView):
 class UserLoginView(APIView):
     serializer_class = UserLoginSerializer
     permission_classes = [permissions.AllowAny]
-    model = User
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -34,7 +35,6 @@ class UserLoginView(APIView):
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     authentication_classes = [IsOwnerOrReadOnly]
-    model = User
     queryset = User.objects.all()
 
     def get_object(self):

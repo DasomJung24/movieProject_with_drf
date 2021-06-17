@@ -29,6 +29,8 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     phone_number = models.CharField(max_length=32)
     birth = models.DateField(null=True)
     is_unmanned_ticket = models.BooleanField(default=True)
+    is_marketing = models.BooleanField(default=False)
+    receive_settings = models.JSONField(default=dict)
 
     objects = UserManager()
 
