@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 
 from megabox_clone_project.utils import IsOwnerOrReadOnly
 from .models import User, FavoriteTheater
-from .serializers import UserSignUpSerializer, UserSerializer, UserLoginSerializer, UserFavoriteSerializer
+from .serializers import UserSignUpSerializer, UserSerializer, UserLoginSerializer
 
 
 class UserSignUpView(generics.CreateAPIView):

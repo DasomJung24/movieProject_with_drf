@@ -3,8 +3,6 @@ from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 from django.utils.translation import ugettext as _
 
-from megabox_clone_project.utils import str_to_bool
-from theaters.models import Theater
 from .models import User, FavoriteTheater
 
 
