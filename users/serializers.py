@@ -48,6 +48,7 @@ class UserLoginSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=32, read_only=True)
     password = serializers.CharField(write_only=True)
     token = serializers.CharField(max_length=255, read_only=True)
+    theaters = serializers.ListField(read_only=True, default=[])
 
     def validate(self, attrs):
         email = attrs.get('email', None)
@@ -86,6 +87,10 @@ class UserLoginSerializer(serializers.Serializer):
         payload = jwt_payload_handler(user)
         token = jwt_encode_handler(payload)
         user.token = token
+
+        favorites = user.favorites.all()
+        user.theaters = [{'id': i.id, 'theater_id': i.theater_id, 'name': i.theater.name} for i in favorites] \
+            if favorites else []
 
         return user
 

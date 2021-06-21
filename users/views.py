@@ -25,6 +25,7 @@ class UserSignUpView(generics.CreateAPIView):
 class UserLoginView(APIView):
     serializer_class = UserLoginSerializer
     permission_classes = [permissions.AllowAny]
+    queryset = User.objects.prefetch_related('favorites', 'favorites__theater')
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
