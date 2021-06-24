@@ -3,24 +3,43 @@ from rest_framework import serializers
 from .models import Movie, Image, Like
 
 
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = ('id', 'movie', 'url', 'type', )
+
+
 class MovieSerializer(serializers.ModelSerializer):
-    image = serializers.SerializerMethodField()
+    images = ImageSerializer(many=True)
     audience_rating = serializers.SlugRelatedField(
         many=False,
         read_only=True,
         slug_field='grade'
     )
+    user_like = serializers.SerializerMethodField(read_only=True)
 
-    def get_image(self, movie):
-        if Image.objects.filter(type=1, movie=movie):
-            image = Image.objects.get(type=1, movie=movie).url
-        else:
-            image = None
-        return image
+    def get_user_like(self, movie):
+        user = self.context.get('user', None)
+        if not user.is_authenticated:
+            return False
+
+        if user.likes.filter(movie_id=movie.id):
+            return True
+        return False
 
     class Meta:
         model = Movie
-        fields = ['id', 'title', 'audience_rating', 'opening_date', 'image', 'ticketing_rate', 'like_count', 'content']
+        fields = [
+            'id',
+            'title',
+            'audience_rating',
+            'opening_date',
+            'images',
+            'ticketing_rate',
+            'like_count',
+            'content',
+            'user_like',
+        ]
 
 
 class MovieDetailSerializer(serializers.ModelSerializer):
@@ -70,7 +89,7 @@ class LikeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Like
-        fields = ('user_id', 'movie_id', )
+        fields = ('user', 'movie', )
 
     def create(self, validated_data):
         like = Like.objects.create(**validated_data)

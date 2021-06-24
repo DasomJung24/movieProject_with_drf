@@ -25,7 +25,7 @@ class UserSignUpView(generics.CreateAPIView):
 class UserLoginView(APIView):
     serializer_class = UserLoginSerializer
     permission_classes = [permissions.AllowAny]
-    queryset = User.objects.prefetch_related('favorites', 'favorites__theater')
+    queryset = User.objects.prefetch_related('favorites', 'favorites__theater', 'likes', 'likes__movie')
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -33,25 +33,25 @@ class UserLoginView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserView(APIView):
     serializer_class = UserSerializer
-    authentication_classes = [IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
     queryset = User.objects.all()
 
     def get_object(self):
         return self.queryset.get(pk=self.request.user.id)
 
-    def retrieve(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.user)
+    def get(self, request, *args, **kwargs):
+        serializer = self.serializer_class(request.user, many=False)
         return Response(serializer.data)
 
-    def update(self, request, *args, **kwargs):
+    def put(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def destroy(self, request, *args, **kwargs):
+    def delete(self, request, *args, **kwargs):
         user = self.get_object()
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

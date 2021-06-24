@@ -43,7 +43,7 @@ class MovieListView(generics.ListAPIView):
 
     def get(self, request, *args, **kwargs):
         page = self.paginate_queryset(self.get_queryset())
-        serializer = self.get_serializer(page, many=True)
+        serializer = self.get_serializer(page, many=True, context={'user': request.user})
         return self.get_paginated_response(serializer.data)
 
 
@@ -68,7 +68,7 @@ class LikeView(CreateModelMixin, DestroyModelMixin, generics.GenericAPIView):
             raise NotFound()
 
     def post(self, request, *args, **kwargs):
-        data = {'user_id': request.user.id, 'movie_id': kwargs['movie_id']}
+        data = {'user': request.user.id, 'movie': kwargs['movie_id']}
         serializer = self.serializer_class(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()

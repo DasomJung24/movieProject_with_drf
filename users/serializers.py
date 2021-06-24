@@ -49,6 +49,12 @@ class UserLoginSerializer(serializers.Serializer):
     password = serializers.CharField(write_only=True)
     token = serializers.CharField(max_length=255, read_only=True)
     theaters = serializers.ListField(read_only=True, default=[])
+    phone_number = serializers.CharField(read_only=True)
+    birth = serializers.DateField(read_only=True)
+    is_unmanned_ticket = serializers.BooleanField(read_only=True, default=True)
+    is_marketing = serializers.BooleanField(read_only=True, default=False)
+    receive_settings = serializers.JSONField(read_only=True, default={})
+    movies = serializers.ListField(read_only=True, default=[])
 
     def validate(self, attrs):
         email = attrs.get('email', None)
@@ -92,11 +98,39 @@ class UserLoginSerializer(serializers.Serializer):
         user.theaters = [{'id': i.id, 'theater_id': i.theater_id, 'name': i.theater.name} for i in favorites] \
             if favorites else []
 
+        likes = user.likes.all()
+        user.movies = [{'id': i.id, 'movie_id': i.movie_id, 'title': i.movie.title} for i in likes] \
+            if likes else []
+
         return user
 
 
 class UserSerializer(serializers.ModelSerializer):
+    favorites = serializers.SerializerMethodField()
+    likes = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ('id', 'name', 'birth', 'phone_number', 'email', 'name', )
+        fields = (
+            'id',
+            'name',
+            'birth',
+            'phone_number',
+            'email',
+            'name',
+            'is_unmanned_ticket',
+            'is_marketing',
+            'receive_settings',
+            'favorites',
+            'likes',
+        )
+
+    def get_favorites(self, obj):
+        favorites = obj.favorites.all()
+        return [{'id': i.id, 'theater_id': i.theater_id, 'name': i.theater.name} for i in favorites] \
+            if favorites else []
+
+    def get_likes(self, obj):
+        likes = obj.likes.all()
+        return [{'id': i.id, 'movie_id': i.movie_id, 'title': i.movie.title} for i in likes] \
+            if likes else []
