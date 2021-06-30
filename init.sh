@@ -29,3 +29,7 @@ python manage.py loaddata init/fixtures/cities.yaml
 
 # theaters
 python manage.py loaddata init/fixtures/theaters.yaml
+
+# movies
+
+python manage.py loaddata init/fixtures/movies.yaml

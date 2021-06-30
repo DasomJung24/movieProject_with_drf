@@ -35,6 +35,7 @@ class Screening(BaseModel):
     theater_screen = models.ForeignKey(TheaterScreen, on_delete=models.CASCADE)
     movie = models.ForeignKey('movies.Movie', on_delete=models.CASCADE)
     started_at = models.DateTimeField()
+    is_active = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'screenings'

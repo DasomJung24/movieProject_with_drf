@@ -37,14 +37,19 @@ class MovieListView(generics.ListAPIView):
         if title:
             return queryset.filter(title__contains=title)
         elif is_open == 'true':
-            return queryset.filter(opening_date__lte=timezone.now().date())
+            return queryset.filter(opening_date__gte=timezone.now().date())
         else:
-            return queryset
+            return queryset.all()
 
     def get(self, request, *args, **kwargs):
-        page = self.paginate_queryset(self.get_queryset())
-        serializer = self.get_serializer(page, many=True, context={'user': request.user})
-        return self.get_paginated_response(serializer.data)
+        movie_list = self.request.query_params.get('list', None)
+        if not movie_list:
+            page = self.paginate_queryset(self.get_queryset())
+            serializer = self.get_serializer(page, many=True, context={'user': request.user})
+            return self.get_paginated_response(serializer.data)
+        else:
+            serializer = self.serializer_class(self.get_queryset(), many=True, context={'user': request.user})
+            return Response(serializer.data)
 
 
 class MovieDetailView(generics.RetrieveAPIView):

@@ -36,13 +36,14 @@ class ScreeningListView(generics.ListAPIView):
     def get_queryset(self):
         date = self.request.query_params.get('date', None)
         if date:
-            if datetime.strptime(date, '%Y-%m-%d').date() == timezone.now().date():
-                return self.queryset.filter(
-                    Q(started_at__gte=timezone.now()) &
-                    Q(started_at__lte=timezone.now().date() + timezone.timedelta(days=1))
-                )
-            else:
-                return self.queryset.filter(started_at=datetime.strptime(date, '%Y-%m-%d').date())
+            # if datetime.strptime(date, '%Y-%m-%d').date() == timezone.now().date():
+            #     return self.queryset.filter(
+            #         Q(started_at__gte=timezone.now()) &
+            #         Q(started_at__lte=timezone.now().date() + timezone.timedelta(days=1))
+            #     )
+            # else:
+            #     return self.queryset.filter(started_at=datetime.strptime(date, '%Y-%m-%d').date())
+            return self.queryset.filter(started_at__gte=datetime.strptime(date, '%Y-%m-%d').date())
         return self.queryset.all()
 
     def get(self, request, *args, **kwargs):
