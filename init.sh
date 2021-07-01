@@ -18,18 +18,8 @@ python manage.py loaddata init/fixtures/tags.yaml
 # types
 python manage.py loaddata init/fixtures/types.yaml
 
-# movies
-python manage.py loaddata init/fixtures/movies.yaml
-
-# images
-python manage.py loaddata init/fixtures/images.yaml
-
 # cities
 python manage.py loaddata init/fixtures/cities.yaml
 
 # theaters
 python manage.py loaddata init/fixtures/theaters.yaml
-
-# movies
-
-python manage.py loaddata init/fixtures/movies.yaml
