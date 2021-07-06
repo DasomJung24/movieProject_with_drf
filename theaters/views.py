@@ -1,13 +1,14 @@
 from collections import defaultdict
-from datetime import datetime
 
 from django.db.models import Q
 from django.utils import timezone
 from rest_framework import generics, permissions
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
+from megabox_clone_project.utils import str_to_int, date_to_timezone
 from theaters.models import Theater, Screening
-from theaters.serializers import TheaterSerializer, ScreeningSerializer
+from theaters.serializers import TheaterSerializer, ScreeningSerializer, ScreeningMovieSerializer
 
 
 class TheaterListView(generics.ListAPIView):
@@ -31,21 +32,89 @@ class TheaterListView(generics.ListAPIView):
 class ScreeningListView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = ScreeningSerializer
-    queryset = Screening.objects.select_related('theater_screen', 'movie')
+    queryset = Screening.objects.select_related(
+        'theater_screen',
+        'movie',
+        'theater_screen__theater'
+    )
 
     def get_queryset(self):
-        date = self.request.query_params.get('date', None)
-        if date:
-            # if datetime.strptime(date, '%Y-%m-%d').date() == timezone.now().date():
-            #     return self.queryset.filter(
-            #         Q(started_at__gte=timezone.now()) &
-            #         Q(started_at__lte=timezone.now().date() + timezone.timedelta(days=1))
-            #     )
-            # else:
-            #     return self.queryset.filter(started_at=datetime.strptime(date, '%Y-%m-%d').date())
-            return self.queryset.filter(started_at__gte=datetime.strptime(date, '%Y-%m-%d').date())
-        return self.queryset.all()
+        movie_ids = str_to_int(self.request.query_params.getlist('movie_ids[]', []))
+        theater_ids = str_to_int(self.request.query_params.getlist('theater_ids[]', []))
+
+        date = date_to_timezone(self.request.query_params.get('date', None))
+        now = timezone.now()
+        next_date = date + timezone.timedelta(days=1)
+
+        if date and date.date() == now.date():
+            return self.queryset.filter(
+                Q(started_at__gte=now) &
+                Q(started_at__lt=next_date) &
+                Q(movie_id__in=movie_ids) &
+                Q(theater_screen__theater_id__in=theater_ids)
+            ) if len(movie_ids) > 0 else self.queryset.filter(
+                Q(started_at__gte=now) &
+                Q(started_at__lt=next_date) &
+                Q(theater_screen__theater_id__in=theater_ids)
+            )
+        elif date and date != now.date():
+            a = self.queryset.filter(
+                Q(started_at__gte=date) &
+                Q(started_at__lt=next_date) &
+                Q(movie_id__in=movie_ids) &
+                Q(theater_screen__theater_id__in=theater_ids)
+            ) if len(movie_ids) > 0 else self.queryset.filter(
+                Q(started_at=date) &
+                Q(started_at__lt=next_date) &
+                Q(theater_screen__theater_id__in=theater_ids)
+            )
+            return a
 
     def get(self, request, *args, **kwargs):
         serializer = self.serializer_class(self.get_queryset(), many=True)
         return Response(serializer.data)
+
+
+# class ScreeningMovieListView(generics.ListAPIView):
+#     permission_classes = [permissions.AllowAny]
+#     serializer_class = ScreeningMovieSerializer
+#     queryset = Screening.objects.select_related(
+#         'theater_screen',
+#         'movie',
+#         'theater_screen__theater'
+#     )
+#
+#     def get_queryset(self):
+#         date = date_to_timezone(self.request.query_params.get('date', None))
+#         now = timezone.now()
+#         next_date = date + timezone.timedelta(days=1)
+#
+#         if date.date() == now.date():
+#             return self.queryset.filter(
+#                 Q(started_at__gte=now) &
+#                 Q(started_at__lt=next_date)
+#             ).distinct('movie_id').order_by('movie_id')
+#         else:
+#             return self.queryset.filter(started_at__day=date).distinct('movie_id').order_by('movie_id')
+#
+#     def get(self, request, *args, **kwargs):
+#         serializer = self.serializer_class(self.get_queryset(), many=True)
+#         return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def get_movies_for_day(request):
+    date = date_to_timezone(request.GET.get('date', None))
+    now = timezone.now()
+    next_date = date + timezone.timedelta(days=1)
+
+    if date.date() == now.date():
+        return Response(Screening.objects.filter(
+            Q(started_at__gte=now) &
+            Q(started_at__lt=next_date)
+        ).values('movie_id').distinct().order_by('movie_id'))
+    else:
+        return Response(Screening.objects.filter(
+            started_at__day=date
+        ).values('movie_id').distinct().order_by('movie_id'))

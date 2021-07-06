@@ -16,13 +16,25 @@ class TheaterSerializer(serializers.ModelSerializer):
         fields = ['id', 'city', 'name']
 
 
+class TheaterScreenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TheaterScreen
+        fields = ['id', 'theater_id', 'screen']
+
+
 class ScreeningSerializer(serializers.ModelSerializer):
     movie = MovieDetailSerializer(many=False)
-    theater_screen = serializers.SerializerMethodField()
+    theater_screen = TheaterScreenSerializer(many=False)
 
     class Meta:
         model = Screening
         fields = ['id', 'theater_screen', 'movie', 'started_at']
 
-    def get_theater_screen(self, obj):
-        return TheaterScreen.objects.get(id=obj.theater_screen_id)
+    # def get_theater_screen(self, obj):
+    #     return TheaterScreen.objects.get(id=obj.theater_screen_id)
+
+
+class ScreeningMovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Screening
+        fields = ['movie_id']

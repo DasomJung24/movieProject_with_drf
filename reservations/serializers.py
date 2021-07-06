@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import City, Theater, TheaterScreen
+from theaters.models import Theater, TheaterScreen, City
 
 
 class TheaterSerializer(serializers.ModelSerializer):

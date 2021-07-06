@@ -37,7 +37,7 @@ class MovieListView(generics.ListAPIView):
         if title:
             return queryset.filter(title__contains=title)
         elif is_open == 'true':
-            return queryset.filter(opening_date__gte=timezone.now().date())
+            return queryset.filter(opening_date__lte=timezone.now().date())
         else:
             return queryset.all()
 
@@ -57,7 +57,7 @@ class MovieDetailView(generics.RetrieveAPIView):
     permission_classes = [permissions.AllowAny]
     lookup_field = 'pk'
     lookup_url_kwarg = 'movie_id'
-    queryset = Movie.objects.all()
+    queryset = Movie.objects.prefetch_related('tag', 'genre', 'type', 'images', 'actor', 'director').all()
 
 
 class LikeView(CreateModelMixin, DestroyModelMixin, generics.GenericAPIView):
