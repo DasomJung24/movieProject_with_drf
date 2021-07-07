@@ -57,8 +57,8 @@ class ScreeningListView(generics.ListAPIView):
                 Q(started_at__lt=next_date) &
                 Q(theater_screen__theater_id__in=theater_ids)
             )
-        elif date and date != now.date():
-            a = self.queryset.filter(
+        elif date and date.date() != now.date():
+            return self.queryset.filter(
                 Q(started_at__gte=date) &
                 Q(started_at__lt=next_date) &
                 Q(movie_id__in=movie_ids) &
@@ -68,7 +68,6 @@ class ScreeningListView(generics.ListAPIView):
                 Q(started_at__lt=next_date) &
                 Q(theater_screen__theater_id__in=theater_ids)
             )
-            return a
 
     def get(self, request, *args, **kwargs):
         serializer = self.serializer_class(self.get_queryset(), many=True)
