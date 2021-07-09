@@ -115,5 +115,6 @@ def get_movies_for_day(request):
         ).values('movie_id').distinct().order_by('movie_id'))
     else:
         return Response(Screening.objects.filter(
-            started_at__day=date
+            Q(started_at__gte=date) &
+            Q(started_at__lt=next_date)
         ).values('movie_id').distinct().order_by('movie_id'))
