@@ -42,11 +42,16 @@ class ScreeningListView(generics.ListAPIView):
         movie_ids = str_to_int(self.request.query_params.getlist('movie_ids[]', []))
         theater_ids = str_to_int(self.request.query_params.getlist('theater_ids[]', []))
 
-        date = date_to_timezone(self.request.query_params.get('date', None))
-        now = timezone.now()
-        next_date = date + timezone.timedelta(days=1)
+        date = date_to_timezone(self.request.query_params.get('date', None)) - timezone.timedelta(hours=9)
+        now = timezone.now() - timezone.timedelta(hours=9)
+        next_date = date + timezone.timedelta(hours=15)
 
         if date and date.date() == now.date():
+            if len(theater_ids) == 0:
+                return self.queryset.filter(
+                    Q(started_at__gte=now) &
+                    Q(started_at__lt=next_date)
+                )
             return self.queryset.filter(
                 Q(started_at__gte=now) &
                 Q(started_at__lt=next_date) &
@@ -58,13 +63,18 @@ class ScreeningListView(generics.ListAPIView):
                 Q(theater_screen__theater_id__in=theater_ids)
             )
         elif date and date.date() != now.date():
+            if len(theater_ids) == 0:
+                return self.queryset.filter(
+                    Q(started_at__gte=date) &
+                    Q(started_at__lt=next_date)
+                )
             return self.queryset.filter(
                 Q(started_at__gte=date) &
                 Q(started_at__lt=next_date) &
                 Q(movie_id__in=movie_ids) &
                 Q(theater_screen__theater_id__in=theater_ids)
             ) if len(movie_ids) > 0 else self.queryset.filter(
-                Q(started_at=date) &
+                Q(started_at__gte=date) &
                 Q(started_at__lt=next_date) &
                 Q(theater_screen__theater_id__in=theater_ids)
             )
@@ -72,33 +82,6 @@ class ScreeningListView(generics.ListAPIView):
     def get(self, request, *args, **kwargs):
         serializer = self.serializer_class(self.get_queryset(), many=True)
         return Response(serializer.data)
-
-
-# class ScreeningMovieListView(generics.ListAPIView):
-#     permission_classes = [permissions.AllowAny]
-#     serializer_class = ScreeningMovieSerializer
-#     queryset = Screening.objects.select_related(
-#         'theater_screen',
-#         'movie',
-#         'theater_screen__theater'
-#     )
-#
-#     def get_queryset(self):
-#         date = date_to_timezone(self.request.query_params.get('date', None))
-#         now = timezone.now()
-#         next_date = date + timezone.timedelta(days=1)
-#
-#         if date.date() == now.date():
-#             return self.queryset.filter(
-#                 Q(started_at__gte=now) &
-#                 Q(started_at__lt=next_date)
-#             ).distinct('movie_id').order_by('movie_id')
-#         else:
-#             return self.queryset.filter(started_at__day=date).distinct('movie_id').order_by('movie_id')
-#
-#     def get(self, request, *args, **kwargs):
-#         serializer = self.serializer_class(self.get_queryset(), many=True)
-#         return Response(serializer.data)
 
 
 @api_view(['GET'])
