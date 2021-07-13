@@ -30,9 +30,6 @@ class ScreeningSerializer(serializers.ModelSerializer):
         model = Screening
         fields = ['id', 'theater_screen', 'movie', 'started_at']
 
-    # def get_theater_screen(self, obj):
-    #     return TheaterScreen.objects.get(id=obj.theater_screen_id)
-
 
 class ScreeningMovieSerializer(serializers.ModelSerializer):
     class Meta:

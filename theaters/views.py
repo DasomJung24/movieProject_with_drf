@@ -45,39 +45,22 @@ class ScreeningListView(generics.ListAPIView):
         date = date_to_timezone(self.request.query_params.get('date', None)) - timezone.timedelta(hours=9)
         now = timezone.now() - timezone.timedelta(hours=9)
         next_date = date + timezone.timedelta(days=1)
+        q = Q(started_at__lt=next_date)
+
+        if len(movie_ids) > 0 and len(theater_ids) == 0:
+            q.add(Q(movie_id__in=movie_ids), q.AND)
+        elif len(movie_ids) == 0 and len(theater_ids) > 0:
+            q.add(Q(theater_screen__theater_id__in=theater_ids), q.AND)
+        else:
+            q.add(Q(movie_id__in=movie_ids), q.AND)
+            q.add(Q(theater_screen__theater_id__in=theater_ids), q.AND)
 
         if date and date.date() == now.date():
-            if len(theater_ids) == 0:
-                return self.queryset.filter(
-                    Q(started_at__gte=now) &
-                    Q(started_at__lt=next_date)
-                )
-            return self.queryset.filter(
-                Q(started_at__gte=now) &
-                Q(started_at__lt=next_date) &
-                Q(movie_id__in=movie_ids) &
-                Q(theater_screen__theater_id__in=theater_ids)
-            ) if len(movie_ids) > 0 else self.queryset.filter(
-                Q(started_at__gte=now) &
-                Q(started_at__lt=next_date) &
-                Q(theater_screen__theater_id__in=theater_ids)
-            )
+            q.add(Q(started_at__gte=now), q.AND)
         elif date and date.date() != now.date():
-            if len(theater_ids) == 0:
-                return self.queryset.filter(
-                    Q(started_at__gte=date) &
-                    Q(started_at__lt=next_date)
-                )
-            return self.queryset.filter(
-                Q(started_at__gte=date) &
-                Q(started_at__lt=next_date) &
-                Q(movie_id__in=movie_ids) &
-                Q(theater_screen__theater_id__in=theater_ids)
-            ) if len(movie_ids) > 0 else self.queryset.filter(
-                Q(started_at__gte=date) &
-                Q(started_at__lt=next_date) &
-                Q(theater_screen__theater_id__in=theater_ids)
-            )
+            q.add(Q(started_at__gte=date), q.AND)
+
+        return self.queryset.filter(q)
 
     def get(self, request, *args, **kwargs):
         serializer = self.serializer_class(self.get_queryset(), many=True)
