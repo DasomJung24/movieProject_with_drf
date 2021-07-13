@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.utils import timezone
 from rest_framework import permissions, generics, status
 from django_filters import rest_framework as filters
@@ -5,6 +6,7 @@ from rest_framework.exceptions import NotFound
 from rest_framework.mixins import CreateModelMixin, DestroyModelMixin
 from rest_framework.response import Response
 
+from megabox_clone_project.utils import date_to_timezone
 from .serializers import MovieSerializer, MovieDetailSerializer, LikeSerializer
 from .models import *
 
@@ -36,6 +38,16 @@ class MovieListView(generics.ListAPIView):
 
         if title:
             return queryset.filter(title__contains=title)
+        elif is_open != 'false' and is_open != 'true':
+            is_open_date = date_to_timezone(is_open) - timezone.timedelta(hours=9)
+            now = timezone.now() - timezone.timedelta(hours=9)
+            if is_open_date.date() == now.date():
+                return queryset.filter(opening_date__lte=timezone.now().date())
+            next_date = is_open_date + timezone.timedelta(hours=15)
+            return self.queryset.filter(
+                    Q(opening_date__gte=now) &
+                    Q(opening_date__lt=next_date)
+                )
         elif is_open == 'true':
             return queryset.filter(opening_date__lte=timezone.now().date())
         else:

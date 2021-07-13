@@ -44,7 +44,7 @@ class ScreeningListView(generics.ListAPIView):
 
         date = date_to_timezone(self.request.query_params.get('date', None)) - timezone.timedelta(hours=9)
         now = timezone.now() - timezone.timedelta(hours=9)
-        next_date = date + timezone.timedelta(hours=15)
+        next_date = date + timezone.timedelta(days=1)
 
         if date and date.date() == now.date():
             if len(theater_ids) == 0:
@@ -87,8 +87,8 @@ class ScreeningListView(generics.ListAPIView):
 @api_view(['GET'])
 @permission_classes([permissions.AllowAny])
 def get_movies_for_day(request):
-    date = date_to_timezone(request.GET.get('date', None))
-    now = timezone.now()
+    date = date_to_timezone(request.GET.get('date', None)) - timezone.timedelta(hours=9)
+    now = timezone.now() - timezone.timedelta(hours=9)
     next_date = date + timezone.timedelta(days=1)
 
     if date.date() == now.date():
