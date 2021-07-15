@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_seed',
     'rest_framework_jwt',
+    'django_db_comments',
     'drf_yasg',
     'django_filters',
     'users',
