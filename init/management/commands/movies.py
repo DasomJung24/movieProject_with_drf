@@ -72,7 +72,7 @@ class Command(BaseCommand):
             timezone.now() - timezone.timedelta(days=7),
         ]
 
-        for i in range(100):
+        for i in range(50):
             date = random.choice(days)
             a = random.choice(audience_ratings)
             t = random.choices(tags, k=2)
