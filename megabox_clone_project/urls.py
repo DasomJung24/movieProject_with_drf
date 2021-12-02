@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
 from rest_framework.permissions import AllowAny
-from rest_framework_jwt.views import refresh_jwt_token, verify_jwt_token, obtain_jwt_token
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
